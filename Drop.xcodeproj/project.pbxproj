@@ -18,6 +18,10 @@
 		EB4DD143172DE5CF001D3070 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD142172DE5CF001D3070 /* Default-568h@2x.png */; };
 		EB4DD146172DE5CF001D3070 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD144172DE5CF001D3070 /* MainStoryboard.storyboard */; };
 		EB4DD149172DE5CF001D3070 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4DD148172DE5CF001D3070 /* ViewController.m */; };
+		EB4DD150172DE5DF001D3070 /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD14F172DE5DF001D3070 /* icon72.png */; };
+		EB4DD152172DE5E2001D3070 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD151172DE5E2001D3070 /* icon144.png */; };
+		EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD153172DE609001D3070 /* MapKit.framework */; };
+		EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD155172DE618001D3070 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		EB4DD145172DE5CF001D3070 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		EB4DD147172DE5CF001D3070 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EB4DD148172DE5CF001D3070 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EB4DD14F172DE5DF001D3070 /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72.png; sourceTree = "<group>"; };
+		EB4DD151172DE5E2001D3070 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
+		EB4DD153172DE609001D3070 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		EB4DD155172DE618001D3070 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */,
+				EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */,
 				EB4DD12D172DE5CF001D3070 /* UIKit.framework in Frameworks */,
 				EB4DD12F172DE5CF001D3070 /* Foundation.framework in Frameworks */,
 				EB4DD131172DE5CF001D3070 /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +66,10 @@
 		EB4DD120172DE5CF001D3070 = {
 			isa = PBXGroup;
 			children = (
+				EB4DD155172DE618001D3070 /* CoreLocation.framework */,
+				EB4DD153172DE609001D3070 /* MapKit.framework */,
+				EB4DD151172DE5E2001D3070 /* icon144.png */,
+				EB4DD14F172DE5DF001D3070 /* icon72.png */,
 				EB4DD132172DE5CF001D3070 /* Drop */,
 				EB4DD12B172DE5CF001D3070 /* Frameworks */,
 				EB4DD12A172DE5CF001D3070 /* Products */,
@@ -163,6 +177,8 @@
 				EB4DD141172DE5CF001D3070 /* Default@2x.png in Resources */,
 				EB4DD143172DE5CF001D3070 /* Default-568h@2x.png in Resources */,
 				EB4DD146172DE5CF001D3070 /* MainStoryboard.storyboard in Resources */,
+				EB4DD150172DE5DF001D3070 /* icon72.png in Resources */,
+				EB4DD152172DE5E2001D3070 /* icon144.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
