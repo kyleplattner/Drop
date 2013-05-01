@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "DroppedPinModel.h"
 
 @interface ViewController ()
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
@@ -33,8 +34,7 @@
     CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
     
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate = touchMapCoordinate;
+    DroppedPinModel *annotation = [[DroppedPinModel alloc] initWithLocation:touchMapCoordinate];
     [self.mapView addAnnotation:annotation];
 }
 

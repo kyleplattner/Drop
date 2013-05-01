@@ -8,6 +8,6 @@
 
 #import <MapKit/MapKit.h>
 
-@interface DroppedPinView : MKAnnotationView
+@interface DroppedPinView : MKPinAnnotationView
 
 @end
