@@ -22,6 +22,8 @@
 		EB4DD152172DE5E2001D3070 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD151172DE5E2001D3070 /* icon144.png */; };
 		EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD153172DE609001D3070 /* MapKit.framework */; };
 		EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD155172DE618001D3070 /* CoreLocation.framework */; };
+		EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF331FD1730797B006D690E /* QuartzCore.framework */; };
+		EBF332041731A702006D690E /* DroppedPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332031731A702006D690E /* DroppedPinView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,9 @@
 		EB4DD151172DE5E2001D3070 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
 		EB4DD153172DE609001D3070 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EB4DD155172DE618001D3070 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EBF331FD1730797B006D690E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EBF332021731A702006D690E /* DroppedPinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppedPinView.h; sourceTree = "<group>"; };
+		EBF332031731A702006D690E /* DroppedPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppedPinView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */,
 				EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */,
 				EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */,
 				EB4DD12D172DE5CF001D3070 /* UIKit.framework in Frameworks */,
@@ -66,6 +72,7 @@
 		EB4DD120172DE5CF001D3070 = {
 			isa = PBXGroup;
 			children = (
+				EBF331FD1730797B006D690E /* QuartzCore.framework */,
 				EB4DD155172DE618001D3070 /* CoreLocation.framework */,
 				EB4DD153172DE609001D3070 /* MapKit.framework */,
 				EB4DD151172DE5E2001D3070 /* icon144.png */,
@@ -102,6 +109,8 @@
 				EB4DD144172DE5CF001D3070 /* MainStoryboard.storyboard */,
 				EB4DD147172DE5CF001D3070 /* ViewController.h */,
 				EB4DD148172DE5CF001D3070 /* ViewController.m */,
+				EBF332021731A702006D690E /* DroppedPinView.h */,
+				EBF332031731A702006D690E /* DroppedPinView.m */,
 				EB4DD133172DE5CF001D3070 /* Supporting Files */,
 			);
 			path = Drop;
@@ -192,6 +201,7 @@
 				EB4DD139172DE5CF001D3070 /* main.m in Sources */,
 				EB4DD13D172DE5CF001D3070 /* AppDelegate.m in Sources */,
 				EB4DD149172DE5CF001D3070 /* ViewController.m in Sources */,
+				EBF332041731A702006D690E /* DroppedPinView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +326,7 @@
 				EB4DD14E172DE5CF001D3070 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
