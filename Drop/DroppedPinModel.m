@@ -7,8 +7,16 @@
 //
 
 #import "DroppedPinModel.h"
-#import "DroppedPinView.h"
 #import <MapKit/MapKit.h>
+
+@interface DroppedPinModel ()
+
+@property (nonatomic, copy) NSNumber *UUID;
+@property (nonatomic, strong) PFObject *object;
+@property (nonatomic, strong) PFGeoPoint *geopoint;
+@property (nonatomic, strong) PFUser *user;
+
+@end
 
 @implementation DroppedPinModel
 
@@ -17,21 +25,9 @@
     if (self) {
         _coordinate = coordinate;
         [self setCoordinate:_coordinate];
+        
     }
     return self;
-}
-
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    static NSString* const kIdentifier = @"ScoutingAnnotation";
-    DroppedPinView* view = (DroppedPinView*)[mapView dequeueReusableAnnotationViewWithIdentifier:kIdentifier];
-    if(view) {
-        [view setAnnotation:annotation];
-        view.canShowCallout = NO;
-        view.animatesDrop = NO;
-        view.draggable = YES;
-        view.pinColor = MKPinAnnotationColorGreen;
-    }
-    return view;
 }
 
 @end

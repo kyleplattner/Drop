@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Drop
+
+  Created by Kyle Plattner on 5/11/13.
+  Copyright (c) 2013 Kyle Plattner. All rights reserved.
+*/
+
+"Login Error" = "Login failed. Contact Kyle Plattner.";
+"Something went wrong. Please try again." = "Error Occured. Contact Kyle Plattner.";

@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB1560B1173DA69B00468E6B /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1560AE173DA69B00468E6B /* LogInViewController.m */; };
+		EB1560B2173DA69B00468E6B /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1560B0173DA69B00468E6B /* SignUpViewController.m */; };
+		EB1560B5173E933300468E6B /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560B3173E933300468E6B /* logo.png */; };
+		EB1560B6173E933300468E6B /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560B4173E933300468E6B /* logo@2x.png */; };
+		EB1560B9173E945200468E6B /* loginBkg.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560B7173E945200468E6B /* loginBkg.png */; };
+		EB1560BA173E945200468E6B /* loginBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560B8173E945200468E6B /* loginBkg@2x.png */; };
+		EB1560C5173E9EBB00468E6B /* loginFieldsBkg.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560C3173E9EBB00468E6B /* loginFieldsBkg.png */; };
+		EB1560C6173E9EBB00468E6B /* loginFieldsBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560C4173E9EBB00468E6B /* loginFieldsBkg@2x.png */; };
+		EB1560CB173EAFD000468E6B /* registerButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560C7173EAFD000468E6B /* registerButton.png */; };
+		EB1560CC173EAFD000468E6B /* loginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560C8173EAFD000468E6B /* loginButton.png */; };
+		EB1560CD173EAFD000468E6B /* registerButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560C9173EAFD000468E6B /* registerButton@2x.png */; };
+		EB1560CE173EAFD000468E6B /* loginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560CA173EAFD000468E6B /* loginButton@2x.png */; };
+		EB1560D1173ECA8400468E6B /* registerPageButton.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560CF173ECA8400468E6B /* registerPageButton.png */; };
+		EB1560D2173ECA8400468E6B /* registerPageButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560D0173ECA8400468E6B /* registerPageButton@2x.png */; };
+		EB1560D5173ECB5D00468E6B /* registerFieldsBkg.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560D3173ECB5D00468E6B /* registerFieldsBkg.png */; };
+		EB1560D6173ECB5D00468E6B /* registerFieldsBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB1560D4173ECB5D00468E6B /* registerFieldsBkg@2x.png */; };
+		EB1560D8173ED16100468E6B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB1560D7173ED16100468E6B /* Localizable.strings */; };
+		EB1560DB17402F6E00468E6B /* DropboxDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1560DA17402F6D00468E6B /* DropboxDelegate.m */; };
 		EB4DD12D172DE5CF001D3070 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD12C172DE5CF001D3070 /* UIKit.framework */; };
 		EB4DD12F172DE5CF001D3070 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD12E172DE5CF001D3070 /* Foundation.framework */; };
 		EB4DD131172DE5CF001D3070 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD130172DE5CF001D3070 /* CoreGraphics.framework */; };
@@ -22,12 +40,72 @@
 		EB4DD152172DE5E2001D3070 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD151172DE5E2001D3070 /* icon144.png */; };
 		EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD153172DE609001D3070 /* MapKit.framework */; };
 		EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD155172DE618001D3070 /* CoreLocation.framework */; };
+		EBCE27301735700B00A63696 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE272F1735700B00A63696 /* DropboxSDK.framework */; };
+		EBCE273A1735A42C00A63696 /* BButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCE27331735A42C00A63696 /* BButton.m */; };
+		EBCE273B1735A42C00A63696 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCE27351735A42C00A63696 /* NSString+FontAwesome.m */; };
+		EBCE273C1735A42C00A63696 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBCE27371735A42C00A63696 /* FontAwesome.ttf */; };
+		EBCE273D1735A42C00A63696 /* UIColor+BButton.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCE27391735A42C00A63696 /* UIColor+BButton.m */; };
+		EBCE27431735A6F600A63696 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE273F1735A6F600A63696 /* libTestFlight.a */; };
+		EBCE27441735A6F600A63696 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = EBCE27401735A6F600A63696 /* README.md */; };
+		EBCE27451735A6F600A63696 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = EBCE27411735A6F600A63696 /* release_notes.md */; };
+		EBCE27471735A72800A63696 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27461735A72800A63696 /* libz.dylib */; };
+		EBCE27491736E4E300A63696 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27481736E4E300A63696 /* Parse.framework */; };
+		EBCE274B1736ED4100A63696 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE274A1736ED4100A63696 /* StoreKit.framework */; };
+		EBCE274D1736ED5500A63696 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE274C1736ED5500A63696 /* AudioToolbox.framework */; };
+		EBCE274F1736ED7900A63696 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE274E1736ED7900A63696 /* CFNetwork.framework */; };
+		EBCE27511736ED8600A63696 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27501736ED8600A63696 /* MobileCoreServices.framework */; };
+		EBCE27531736ED9000A63696 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27521736ED9000A63696 /* SystemConfiguration.framework */; };
 		EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF331FD1730797B006D690E /* QuartzCore.framework */; };
-		EBF332041731A702006D690E /* DroppedPinView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332031731A702006D690E /* DroppedPinView.m */; };
 		EBF332071731A833006D690E /* DroppedPinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332061731A833006D690E /* DroppedPinModel.m */; };
+		EBF3320A1731C32B006D690E /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332091731C32B006D690E /* MapViewDelegate.m */; };
+		EBF3320E1731C4C1006D690E /* DroppedPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */; };
+		EBF3320F1731C4C1006D690E /* DroppedPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBF3320D1731C4C1006D690E /* DroppedPinViewController.xib */; };
+		EBF3321717333DF1006D690E /* settingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3321517333DF1006D690E /* settingsIcon.png */; };
+		EBF3321817333DF1006D690E /* settingsIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3321617333DF1006D690E /* settingsIcon@2x.png */; };
+		EBF3321D17355DB4006D690E /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3321C17355DB4006D690E /* Default-Portrait~ipad.png */; };
+		EBF3321F17355DBB006D690E /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3321E17355DBB006D690E /* Default-Portrait@2x~ipad.png */; };
+		EBF3322117355DC5006D690E /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3322017355DC5006D690E /* Default-Landscape~ipad.png */; };
+		EBF3322317355DCA006D690E /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3322217355DC9006D690E /* Default-Landscape@2x~ipad.png */; };
+		EBF332A717356305006D690E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF332A617356305006D690E /* Security.framework */; };
+		EBF33357173564F4006D690E /* browseDirectoryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF33346173564F2006D690E /* browseDirectoryIcon.png */; };
+		EBF33358173564F4006D690E /* browseDirectoryIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF33347173564F2006D690E /* browseDirectoryIcon@2x.png */; };
+		EBF33359173564F4006D690E /* downloadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF33348173564F2006D690E /* downloadIcon.png */; };
+		EBF3335A173564F4006D690E /* downloadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF33349173564F2006D690E /* downloadIcon@2x.png */; };
+		EBF3335B173564F4006D690E /* dropboxDirIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3334A173564F2006D690E /* dropboxDirIcon.png */; };
+		EBF3335C173564F4006D690E /* dropboxDirIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3334B173564F2006D690E /* dropboxDirIcon@2x.png */; };
+		EBF3335D173564F4006D690E /* pdfFileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3334C173564F2006D690E /* pdfFileIcon.png */; };
+		EBF3335E173564F4006D690E /* pdfFileIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBF3334D173564F2006D690E /* pdfFileIcon@2x.png */; };
+		EBF3335F173564F4006D690E /* KioskDropboxPDFBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF3334F173564F2006D690E /* KioskDropboxPDFBrowserViewController.m */; };
+		EBF33360173564F4006D690E /* KioskDropboxPDFDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF33351173564F3006D690E /* KioskDropboxPDFDataController.m */; };
+		EBF33361173564F4006D690E /* KioskDropboxPDFRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF33353173564F3006D690E /* KioskDropboxPDFRootViewController.m */; };
+		EBF33362173564F4006D690E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF33356173564F4006D690E /* MBProgressHUD.m */; };
+		EBF33366173566B6006D690E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF33365173566B6006D690E /* SettingsViewController.m */; };
+		EBF3336917356BD1006D690E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */; };
+		EBF3336A17356BD1006D690E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB1560AD173DA69B00468E6B /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
+		EB1560AE173DA69B00468E6B /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		EB1560AF173DA69B00468E6B /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		EB1560B0173DA69B00468E6B /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		EB1560B3173E933300468E6B /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		EB1560B4173E933300468E6B /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
+		EB1560B7173E945200468E6B /* loginBkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginBkg.png; sourceTree = "<group>"; };
+		EB1560B8173E945200468E6B /* loginBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginBkg@2x.png"; sourceTree = "<group>"; };
+		EB1560C3173E9EBB00468E6B /* loginFieldsBkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginFieldsBkg.png; sourceTree = "<group>"; };
+		EB1560C4173E9EBB00468E6B /* loginFieldsBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginFieldsBkg@2x.png"; sourceTree = "<group>"; };
+		EB1560C7173EAFD000468E6B /* registerButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registerButton.png; sourceTree = "<group>"; };
+		EB1560C8173EAFD000468E6B /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButton.png; sourceTree = "<group>"; };
+		EB1560C9173EAFD000468E6B /* registerButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registerButton@2x.png"; sourceTree = "<group>"; };
+		EB1560CA173EAFD000468E6B /* loginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginButton@2x.png"; sourceTree = "<group>"; };
+		EB1560CF173ECA8400468E6B /* registerPageButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registerPageButton.png; sourceTree = "<group>"; };
+		EB1560D0173ECA8400468E6B /* registerPageButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registerPageButton@2x.png"; sourceTree = "<group>"; };
+		EB1560D3173ECB5D00468E6B /* registerFieldsBkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registerFieldsBkg.png; sourceTree = "<group>"; };
+		EB1560D4173ECB5D00468E6B /* registerFieldsBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registerFieldsBkg@2x.png"; sourceTree = "<group>"; };
+		EB1560D7173ED16100468E6B /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		EB1560D917402F6D00468E6B /* DropboxDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxDelegate.h; sourceTree = "<group>"; };
+		EB1560DA17402F6D00468E6B /* DropboxDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxDelegate.m; sourceTree = "<group>"; };
 		EB4DD129172DE5CF001D3070 /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB4DD12C172DE5CF001D3070 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EB4DD12E172DE5CF001D3070 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,11 +126,60 @@
 		EB4DD151172DE5E2001D3070 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
 		EB4DD153172DE609001D3070 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EB4DD155172DE618001D3070 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EBCE272F1735700B00A63696 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		EBCE27321735A42C00A63696 /* BButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BButton.h; sourceTree = "<group>"; };
+		EBCE27331735A42C00A63696 /* BButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BButton.m; sourceTree = "<group>"; };
+		EBCE27341735A42C00A63696 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		EBCE27351735A42C00A63696 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		EBCE27371735A42C00A63696 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		EBCE27381735A42C00A63696 /* UIColor+BButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+BButton.h"; sourceTree = "<group>"; };
+		EBCE27391735A42C00A63696 /* UIColor+BButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+BButton.m"; sourceTree = "<group>"; };
+		EBCE273F1735A6F600A63696 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		EBCE27401735A6F600A63696 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		EBCE27411735A6F600A63696 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		EBCE27421735A6F600A63696 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		EBCE27461735A72800A63696 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EBCE27481736E4E300A63696 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		EBCE274A1736ED4100A63696 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		EBCE274C1736ED5500A63696 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		EBCE274E1736ED7900A63696 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		EBCE27501736ED8600A63696 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		EBCE27521736ED9000A63696 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EBF331FD1730797B006D690E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		EBF332021731A702006D690E /* DroppedPinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppedPinView.h; sourceTree = "<group>"; };
-		EBF332031731A702006D690E /* DroppedPinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppedPinView.m; sourceTree = "<group>"; };
 		EBF332051731A833006D690E /* DroppedPinModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppedPinModel.h; sourceTree = "<group>"; };
 		EBF332061731A833006D690E /* DroppedPinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppedPinModel.m; sourceTree = "<group>"; };
+		EBF332081731C32B006D690E /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
+		EBF332091731C32B006D690E /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
+		EBF3320B1731C4C1006D690E /* DroppedPinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppedPinViewController.h; sourceTree = "<group>"; };
+		EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppedPinViewController.m; sourceTree = "<group>"; };
+		EBF3320D1731C4C1006D690E /* DroppedPinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DroppedPinViewController.xib; sourceTree = "<group>"; };
+		EBF3321517333DF1006D690E /* settingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settingsIcon.png; sourceTree = "<group>"; };
+		EBF3321617333DF1006D690E /* settingsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsIcon@2x.png"; sourceTree = "<group>"; };
+		EBF3321C17355DB4006D690E /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		EBF3321E17355DBB006D690E /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		EBF3322017355DC5006D690E /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		EBF3322217355DC9006D690E /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		EBF332A617356305006D690E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EBF33346173564F2006D690E /* browseDirectoryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browseDirectoryIcon.png; sourceTree = "<group>"; };
+		EBF33347173564F2006D690E /* browseDirectoryIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "browseDirectoryIcon@2x.png"; sourceTree = "<group>"; };
+		EBF33348173564F2006D690E /* downloadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloadIcon.png; sourceTree = "<group>"; };
+		EBF33349173564F2006D690E /* downloadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloadIcon@2x.png"; sourceTree = "<group>"; };
+		EBF3334A173564F2006D690E /* dropboxDirIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropboxDirIcon.png; sourceTree = "<group>"; };
+		EBF3334B173564F2006D690E /* dropboxDirIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropboxDirIcon@2x.png"; sourceTree = "<group>"; };
+		EBF3334C173564F2006D690E /* pdfFileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdfFileIcon.png; sourceTree = "<group>"; };
+		EBF3334D173564F2006D690E /* pdfFileIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pdfFileIcon@2x.png"; sourceTree = "<group>"; };
+		EBF3334E173564F2006D690E /* KioskDropboxPDFBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KioskDropboxPDFBrowserViewController.h; sourceTree = "<group>"; };
+		EBF3334F173564F2006D690E /* KioskDropboxPDFBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KioskDropboxPDFBrowserViewController.m; sourceTree = "<group>"; };
+		EBF33350173564F2006D690E /* KioskDropboxPDFDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KioskDropboxPDFDataController.h; sourceTree = "<group>"; };
+		EBF33351173564F3006D690E /* KioskDropboxPDFDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KioskDropboxPDFDataController.m; sourceTree = "<group>"; };
+		EBF33352173564F3006D690E /* KioskDropboxPDFRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KioskDropboxPDFRootViewController.h; sourceTree = "<group>"; };
+		EBF33353173564F3006D690E /* KioskDropboxPDFRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KioskDropboxPDFRootViewController.m; sourceTree = "<group>"; };
+		EBF33355173564F4006D690E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		EBF33356173564F4006D690E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		EBF33364173566B6006D690E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		EBF33365173566B6006D690E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +187,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBCE27531736ED9000A63696 /* SystemConfiguration.framework in Frameworks */,
+				EBCE27511736ED8600A63696 /* MobileCoreServices.framework in Frameworks */,
+				EBCE274F1736ED7900A63696 /* CFNetwork.framework in Frameworks */,
+				EBCE274D1736ED5500A63696 /* AudioToolbox.framework in Frameworks */,
+				EBCE274B1736ED4100A63696 /* StoreKit.framework in Frameworks */,
+				EBCE27471735A72800A63696 /* libz.dylib in Frameworks */,
+				EBF332A717356305006D690E /* Security.framework in Frameworks */,
 				EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */,
 				EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */,
 				EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */,
 				EB4DD12D172DE5CF001D3070 /* UIKit.framework in Frameworks */,
 				EB4DD12F172DE5CF001D3070 /* Foundation.framework in Frameworks */,
 				EB4DD131172DE5CF001D3070 /* CoreGraphics.framework in Frameworks */,
+				EBCE27301735700B00A63696 /* DropboxSDK.framework in Frameworks */,
+				EBCE27431735A6F600A63696 /* libTestFlight.a in Frameworks */,
+				EBCE27491736E4E300A63696 /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,9 +212,10 @@
 		EB4DD120172DE5CF001D3070 = {
 			isa = PBXGroup;
 			children = (
-				EBF331FD1730797B006D690E /* QuartzCore.framework */,
-				EB4DD155172DE618001D3070 /* CoreLocation.framework */,
-				EB4DD153172DE609001D3070 /* MapKit.framework */,
+				EBF3322217355DC9006D690E /* Default-Landscape@2x~ipad.png */,
+				EBF3322017355DC5006D690E /* Default-Landscape~ipad.png */,
+				EBF3321E17355DBB006D690E /* Default-Portrait@2x~ipad.png */,
+				EBF3321C17355DB4006D690E /* Default-Portrait~ipad.png */,
 				EB4DD151172DE5E2001D3070 /* icon144.png */,
 				EB4DD14F172DE5DF001D3070 /* icon72.png */,
 				EB4DD132172DE5CF001D3070 /* Drop */,
@@ -97,6 +235,19 @@
 		EB4DD12B172DE5CF001D3070 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBCE27521736ED9000A63696 /* SystemConfiguration.framework */,
+				EBCE27501736ED8600A63696 /* MobileCoreServices.framework */,
+				EBCE274E1736ED7900A63696 /* CFNetwork.framework */,
+				EBCE274C1736ED5500A63696 /* AudioToolbox.framework */,
+				EBCE274A1736ED4100A63696 /* StoreKit.framework */,
+				EBCE27481736E4E300A63696 /* Parse.framework */,
+				EBCE27461735A72800A63696 /* libz.dylib */,
+				EBCE273E1735A6F600A63696 /* TestFlightSDK1.2.4 */,
+				EBCE272F1735700B00A63696 /* DropboxSDK.framework */,
+				EBF332A617356305006D690E /* Security.framework */,
+				EBF331FD1730797B006D690E /* QuartzCore.framework */,
+				EB4DD155172DE618001D3070 /* CoreLocation.framework */,
+				EB4DD153172DE609001D3070 /* MapKit.framework */,
 				EB4DD12C172DE5CF001D3070 /* UIKit.framework */,
 				EB4DD12E172DE5CF001D3070 /* Foundation.framework */,
 				EB4DD130172DE5CF001D3070 /* CoreGraphics.framework */,
@@ -107,15 +258,30 @@
 		EB4DD132172DE5CF001D3070 /* Drop */ = {
 			isa = PBXGroup;
 			children = (
+				EBF3321417333DE3006D690E /* Images */,
 				EB4DD13B172DE5CF001D3070 /* AppDelegate.h */,
 				EB4DD13C172DE5CF001D3070 /* AppDelegate.m */,
 				EB4DD144172DE5CF001D3070 /* MainStoryboard.storyboard */,
+				EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */,
+				EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */,
 				EB4DD147172DE5CF001D3070 /* ViewController.h */,
 				EB4DD148172DE5CF001D3070 /* ViewController.m */,
 				EBF332051731A833006D690E /* DroppedPinModel.h */,
 				EBF332061731A833006D690E /* DroppedPinModel.m */,
-				EBF332021731A702006D690E /* DroppedPinView.h */,
-				EBF332031731A702006D690E /* DroppedPinView.m */,
+				EBF332081731C32B006D690E /* MapViewDelegate.h */,
+				EBF332091731C32B006D690E /* MapViewDelegate.m */,
+				EBF3320B1731C4C1006D690E /* DroppedPinViewController.h */,
+				EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */,
+				EBF3320D1731C4C1006D690E /* DroppedPinViewController.xib */,
+				EBF33364173566B6006D690E /* SettingsViewController.h */,
+				EBF33365173566B6006D690E /* SettingsViewController.m */,
+				EB1560AD173DA69B00468E6B /* LogInViewController.h */,
+				EB1560AE173DA69B00468E6B /* LogInViewController.m */,
+				EB1560AF173DA69B00468E6B /* SignUpViewController.h */,
+				EB1560B0173DA69B00468E6B /* SignUpViewController.m */,
+				EB1560D917402F6D00468E6B /* DropboxDelegate.h */,
+				EB1560DA17402F6D00468E6B /* DropboxDelegate.m */,
+				EBF33363173564FB006D690E /* Dropbox */,
 				EB4DD133172DE5CF001D3070 /* Supporting Files */,
 			);
 			path = Drop;
@@ -131,8 +297,106 @@
 				EB4DD13E172DE5CF001D3070 /* Default.png */,
 				EB4DD140172DE5CF001D3070 /* Default@2x.png */,
 				EB4DD142172DE5CF001D3070 /* Default-568h@2x.png */,
+				EB1560D7173ED16100468E6B /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBCE27311735A42C00A63696 /* BButton */ = {
+			isa = PBXGroup;
+			children = (
+				EBCE27321735A42C00A63696 /* BButton.h */,
+				EBCE27331735A42C00A63696 /* BButton.m */,
+				EBCE27341735A42C00A63696 /* NSString+FontAwesome.h */,
+				EBCE27351735A42C00A63696 /* NSString+FontAwesome.m */,
+				EBCE27361735A42C00A63696 /* resources */,
+				EBCE27381735A42C00A63696 /* UIColor+BButton.h */,
+				EBCE27391735A42C00A63696 /* UIColor+BButton.m */,
+			);
+			path = BButton;
+			sourceTree = "<group>";
+		};
+		EBCE27361735A42C00A63696 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				EBCE27371735A42C00A63696 /* FontAwesome.ttf */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		EBCE273E1735A6F600A63696 /* TestFlightSDK1.2.4 */ = {
+			isa = PBXGroup;
+			children = (
+				EBCE273F1735A6F600A63696 /* libTestFlight.a */,
+				EBCE27401735A6F600A63696 /* README.md */,
+				EBCE27411735A6F600A63696 /* release_notes.md */,
+				EBCE27421735A6F600A63696 /* TestFlight.h */,
+			);
+			path = TestFlightSDK1.2.4;
+			sourceTree = "<group>";
+		};
+		EBF3321417333DE3006D690E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				EB1560D3173ECB5D00468E6B /* registerFieldsBkg.png */,
+				EB1560D4173ECB5D00468E6B /* registerFieldsBkg@2x.png */,
+				EB1560CF173ECA8400468E6B /* registerPageButton.png */,
+				EB1560D0173ECA8400468E6B /* registerPageButton@2x.png */,
+				EB1560C7173EAFD000468E6B /* registerButton.png */,
+				EB1560C8173EAFD000468E6B /* loginButton.png */,
+				EB1560C9173EAFD000468E6B /* registerButton@2x.png */,
+				EB1560CA173EAFD000468E6B /* loginButton@2x.png */,
+				EB1560C3173E9EBB00468E6B /* loginFieldsBkg.png */,
+				EB1560C4173E9EBB00468E6B /* loginFieldsBkg@2x.png */,
+				EB1560B7173E945200468E6B /* loginBkg.png */,
+				EB1560B8173E945200468E6B /* loginBkg@2x.png */,
+				EB1560B3173E933300468E6B /* logo.png */,
+				EB1560B4173E933300468E6B /* logo@2x.png */,
+				EBF3321517333DF1006D690E /* settingsIcon.png */,
+				EBF3321617333DF1006D690E /* settingsIcon@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		EBF33345173564F1006D690E /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EBF33346173564F2006D690E /* browseDirectoryIcon.png */,
+				EBF33347173564F2006D690E /* browseDirectoryIcon@2x.png */,
+				EBF33348173564F2006D690E /* downloadIcon.png */,
+				EBF33349173564F2006D690E /* downloadIcon@2x.png */,
+				EBF3334A173564F2006D690E /* dropboxDirIcon.png */,
+				EBF3334B173564F2006D690E /* dropboxDirIcon@2x.png */,
+				EBF3334C173564F2006D690E /* pdfFileIcon.png */,
+				EBF3334D173564F2006D690E /* pdfFileIcon@2x.png */,
+			);
+			name = Icons;
+			path = icons;
+			sourceTree = "<group>";
+		};
+		EBF33354173564F4006D690E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EBCE27311735A42C00A63696 /* BButton */,
+				EBF33355173564F4006D690E /* MBProgressHUD.h */,
+				EBF33356173564F4006D690E /* MBProgressHUD.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EBF33363173564FB006D690E /* Dropbox */ = {
+			isa = PBXGroup;
+			children = (
+				EBF33345173564F1006D690E /* Icons */,
+				EBF3334E173564F2006D690E /* KioskDropboxPDFBrowserViewController.h */,
+				EBF3334F173564F2006D690E /* KioskDropboxPDFBrowserViewController.m */,
+				EBF33350173564F2006D690E /* KioskDropboxPDFDataController.h */,
+				EBF33351173564F3006D690E /* KioskDropboxPDFDataController.m */,
+				EBF33352173564F3006D690E /* KioskDropboxPDFRootViewController.h */,
+				EBF33353173564F3006D690E /* KioskDropboxPDFRootViewController.m */,
+				EBF33354173564F4006D690E /* Utilities */,
+			);
+			name = Dropbox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +457,41 @@
 				EB4DD146172DE5CF001D3070 /* MainStoryboard.storyboard in Resources */,
 				EB4DD150172DE5DF001D3070 /* icon72.png in Resources */,
 				EB4DD152172DE5E2001D3070 /* icon144.png in Resources */,
+				EBF3320F1731C4C1006D690E /* DroppedPinViewController.xib in Resources */,
+				EBF3321717333DF1006D690E /* settingsIcon.png in Resources */,
+				EBF3321817333DF1006D690E /* settingsIcon@2x.png in Resources */,
+				EBF3321D17355DB4006D690E /* Default-Portrait~ipad.png in Resources */,
+				EBF3321F17355DBB006D690E /* Default-Portrait@2x~ipad.png in Resources */,
+				EBF3322117355DC5006D690E /* Default-Landscape~ipad.png in Resources */,
+				EBF3322317355DCA006D690E /* Default-Landscape@2x~ipad.png in Resources */,
+				EBF33357173564F4006D690E /* browseDirectoryIcon.png in Resources */,
+				EBF33358173564F4006D690E /* browseDirectoryIcon@2x.png in Resources */,
+				EBF33359173564F4006D690E /* downloadIcon.png in Resources */,
+				EBF3335A173564F4006D690E /* downloadIcon@2x.png in Resources */,
+				EBF3335B173564F4006D690E /* dropboxDirIcon.png in Resources */,
+				EBF3335C173564F4006D690E /* dropboxDirIcon@2x.png in Resources */,
+				EBF3335D173564F4006D690E /* pdfFileIcon.png in Resources */,
+				EBF3335E173564F4006D690E /* pdfFileIcon@2x.png in Resources */,
+				EBF3336917356BD1006D690E /* MainStoryboard_iPad.storyboard in Resources */,
+				EBF3336A17356BD1006D690E /* MainStoryboard_iPhone.storyboard in Resources */,
+				EBCE273C1735A42C00A63696 /* FontAwesome.ttf in Resources */,
+				EBCE27441735A6F600A63696 /* README.md in Resources */,
+				EBCE27451735A6F600A63696 /* release_notes.md in Resources */,
+				EB1560B5173E933300468E6B /* logo.png in Resources */,
+				EB1560B6173E933300468E6B /* logo@2x.png in Resources */,
+				EB1560B9173E945200468E6B /* loginBkg.png in Resources */,
+				EB1560BA173E945200468E6B /* loginBkg@2x.png in Resources */,
+				EB1560C5173E9EBB00468E6B /* loginFieldsBkg.png in Resources */,
+				EB1560C6173E9EBB00468E6B /* loginFieldsBkg@2x.png in Resources */,
+				EB1560CB173EAFD000468E6B /* registerButton.png in Resources */,
+				EB1560CC173EAFD000468E6B /* loginButton.png in Resources */,
+				EB1560CD173EAFD000468E6B /* registerButton@2x.png in Resources */,
+				EB1560CE173EAFD000468E6B /* loginButton@2x.png in Resources */,
+				EB1560D1173ECA8400468E6B /* registerPageButton.png in Resources */,
+				EB1560D2173ECA8400468E6B /* registerPageButton@2x.png in Resources */,
+				EB1560D5173ECB5D00468E6B /* registerFieldsBkg.png in Resources */,
+				EB1560D6173ECB5D00468E6B /* registerFieldsBkg@2x.png in Resources */,
+				EB1560D8173ED16100468E6B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,8 +505,20 @@
 				EB4DD139172DE5CF001D3070 /* main.m in Sources */,
 				EB4DD13D172DE5CF001D3070 /* AppDelegate.m in Sources */,
 				EB4DD149172DE5CF001D3070 /* ViewController.m in Sources */,
-				EBF332041731A702006D690E /* DroppedPinView.m in Sources */,
 				EBF332071731A833006D690E /* DroppedPinModel.m in Sources */,
+				EBF3320A1731C32B006D690E /* MapViewDelegate.m in Sources */,
+				EBF3320E1731C4C1006D690E /* DroppedPinViewController.m in Sources */,
+				EBF3335F173564F4006D690E /* KioskDropboxPDFBrowserViewController.m in Sources */,
+				EBF33360173564F4006D690E /* KioskDropboxPDFDataController.m in Sources */,
+				EBF33361173564F4006D690E /* KioskDropboxPDFRootViewController.m in Sources */,
+				EBF33362173564F4006D690E /* MBProgressHUD.m in Sources */,
+				EBF33366173566B6006D690E /* SettingsViewController.m in Sources */,
+				EBCE273A1735A42C00A63696 /* BButton.m in Sources */,
+				EBCE273B1735A42C00A63696 /* NSString+FontAwesome.m in Sources */,
+				EBCE273D1735A42C00A63696 /* UIColor+BButton.m in Sources */,
+				EB1560B1173DA69B00468E6B /* LogInViewController.m in Sources */,
+				EB1560B2173DA69B00468E6B /* SignUpViewController.m in Sources */,
+				EB1560DB17402F6E00468E6B /* DropboxDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,9 +605,18 @@
 		EB4DD14D172DE5CF001D3070 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Drop/Source/External\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Drop/Drop-Prefix.pch";
 				INFOPLIST_FILE = "Drop/Drop-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.4\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -305,9 +625,18 @@
 		EB4DD14E172DE5CF001D3070 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Drop/Source/External\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Drop/Drop-Prefix.pch";
 				INFOPLIST_FILE = "Drop/Drop-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.2.4\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -4,14 +4,58 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="xny-uu-Mhw">
             <objects>
-                <viewController modalTransitionStyle="partialCurl" id="rLH-X2-dpA" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="partialCurl" id="rLH-X2-dpA" customClass="SettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Jr-wV-gNP">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIP-VC-kFa" customClass="BButton">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="KT1-4k-vh5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" red="0.26824700342465757" green="0.26824700342465757" blue="0.26824700342465757" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutButtonPressed:" destination="rLH-X2-dpA" eventType="touchUpInside" id="BVn-q9-L8t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ws-9O-fqW" customClass="BButton">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="221" id="2yj-ti-EKa"/>
+                                    <constraint firstAttribute="height" constant="45" id="Pdy-u0-2jC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="Dropbox Setup Test">
+                                    <color key="titleColor" red="0.26824700340000002" green="0.26824700340000002" blue="0.26824700340000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setupButtonPressed:" destination="rLH-X2-dpA" eventType="touchUpInside" id="cvf-Yd-3NE"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4ws-9O-fqW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BiW-LD-RiL"/>
+                            <constraint firstAttribute="trailing" secondItem="kIP-VC-kFa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="XT2-4n-566"/>
+                            <constraint firstItem="4ws-9O-fqW" firstAttribute="leading" secondItem="kIP-VC-kFa" secondAttribute="leading" type="default" id="cIZ-Cb-eWq"/>
+                            <constraint firstAttribute="bottom" secondItem="kIP-VC-kFa" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="hfv-hc-gp1"/>
+                            <constraint firstItem="kIP-VC-kFa" firstAttribute="top" secondItem="4ws-9O-fqW" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="jjf-WW-JCk"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -29,12 +73,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MAA-y4-bbY"/>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkk-lR-8k9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkk-lR-8k9">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="jYF-Li-tqJ"/>
+                                    <constraint firstAttribute="height" constant="51" id="hE3-Ui-vwl"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Setup">
+                                <state key="normal" image="settingsIcon.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -42,6 +86,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="settingsButtonPressed:" destination="2" eventType="touchUpInside" id="q9e-uo-h71"/>
                                     <segue destination="rLH-X2-dpA" kind="modal" modalTransitionStyle="partialCurl" id="FF5-ER-dDy"/>
                                 </connections>
                             </button>
@@ -50,10 +95,10 @@
                         <constraints>
                             <constraint firstItem="MAA-y4-bbY" firstAttribute="bottom" secondItem="5" secondAttribute="bottom" type="default" id="0nt-47-r2x"/>
                             <constraint firstItem="MAA-y4-bbY" firstAttribute="top" secondItem="5" secondAttribute="top" type="default" id="Ejg-EM-ZfI"/>
+                            <constraint firstAttribute="bottom" secondItem="rkk-lR-8k9" secondAttribute="bottom" constant="13" id="KfJ-49-zvq"/>
                             <constraint firstItem="MAA-y4-bbY" firstAttribute="trailing" secondItem="5" secondAttribute="trailing" type="default" id="PVm-74-6w5"/>
-                            <constraint firstAttribute="bottom" secondItem="rkk-lR-8k9" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="oeN-7c-PSh"/>
+                            <constraint firstAttribute="trailing" secondItem="rkk-lR-8k9" secondAttribute="trailing" constant="15" id="bEx-QF-gFq"/>
                             <constraint firstItem="MAA-y4-bbY" firstAttribute="leading" secondItem="5" secondAttribute="leading" type="default" id="w9z-j3-N8V"/>
-                            <constraint firstAttribute="trailing" secondItem="rkk-lR-8k9" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="xgt-EC-UIP"/>
                         </constraints>
                     </view>
                     <connections>
@@ -64,17 +109,9 @@
             </objects>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
+    <resources>
+        <image name="settingsIcon.png" width="50" height="50"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

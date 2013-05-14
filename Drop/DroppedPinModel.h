@@ -8,14 +8,16 @@
  
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import <Parse/Parse.h>
 
-@protocol MapAnnotationDelegate <NSObject>
--(MKAnnotationView *)mapView:(MKMapView *)MapView viewForAnnotation:(id <MKAnnotation>)annotation;
-@optional
--(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
-@end
+@interface DroppedPinModel : NSObject <MKAnnotation>
 
-@interface DroppedPinModel : NSObject <MKAnnotation, MapAnnotationDelegate>
 @property (nonatomic, readwrite, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic, readonly, copy) NSNumber *UUID;;
+@property (nonatomic, readonly, strong) PFObject *object;
+@property (nonatomic, readonly, strong) PFGeoPoint *geopoint;
+@property (nonatomic, readonly, strong) PFUser *user;
+
 - (id)initWithLocation:(CLLocationCoordinate2D)coordinate;
+
 @end

@@ -7,13 +7,38 @@
 //
 
 #import "AppDelegate.h"
+#import <DropboxSDK/DropboxSDK.h>
+#import "TestFlight.h"
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    DBSession* dbSession = [[DBSession alloc] initWithAppKey:@"tta35f8sfuibet8" appSecret:@"rix005m7es4hrs8" root:kDBRootDropbox];
+    [DBSession setSharedSession:dbSession];
+    [Parse setApplicationId:@"6ccB0yMKVEEo8i6kQmlKX6t3ryGX0Grma4VQDpQQ" clientKey:@"VRl41iG50ow5xDvQ2TtKr09bmA26stvoQpTVPi8m"];
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    [TestFlight takeOff:@"490688de-870a-47bd-93ae-eab1185b43fa"];
+    
+//    PFACL *defaultACL = [PFACL ACL];
+//    [defaultACL setPublicReadAccess:YES];
+//    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) {
+            NSLog(@"App linked successfully!");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DropboxNotification" object:nil];
+        }
+        return YES;
+    }
+    // Add whatever other url handling code your app requires here
+    return NO;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
