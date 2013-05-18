@@ -10,9 +10,11 @@
 #import "KioskDropboxPDFBrowserViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import <AssetsLibrary/ALAsset.h>
+#import "Drop.h"
 
 @interface DropboxDelegate : NSObject <KioskDropboxPDFBrowserViewControllerUIDelegate, DBRestClientDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, retain) UIViewController* view;
+@property (nonatomic, retain) Drop *drop;
 
 @end

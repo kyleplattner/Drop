@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import <Parse/Parse.h>
+#import "Drop.h"
 
 @interface ViewController ()
 - (IBAction)settingsButtonPressed:(id)sender;
@@ -31,6 +32,9 @@
     longPress.minimumPressDuration = 2.0;
     [self.mapView addGestureRecognizer:longPress];
     [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
+    if (![[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] linkFromController:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,8 +73,9 @@
         return;
     CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
     CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-    DroppedPinModel *annotation = [[DroppedPinModel alloc] initWithLocation:touchMapCoordinate];
-    [self.mapView addAnnotation:annotation];
+    Drop *drop = [[Drop alloc] initWithCoordinate:touchMapCoordinate];
+    [self.mapView addAnnotation:drop];
+    [_mapViewDelegate linkDropboxFileForDrop:drop];
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {

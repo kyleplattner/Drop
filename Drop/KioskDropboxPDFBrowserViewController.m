@@ -138,7 +138,7 @@
 
 #pragma mark - KioskDropboxPDFRootViewControllerDelegate functions
 
-- (void) loadedFileFromDropbox:(NSString *)fileName
+- (void)loadedFileFromDropbox:(NSString *)fileName
 {
         [[self uiDelegate] refreshLibrarySection];
 }

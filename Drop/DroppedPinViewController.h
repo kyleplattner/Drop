@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "DroppedPinModel.h"
+#import "Drop.h"
 
 @interface DroppedPinViewController : UIViewController
 
 @property (nonatomic, retain) MKMapView* mapView;
-@property (nonatomic,retain) DroppedPinModel *droppedPin;
+@property (nonatomic,retain) Drop *droppedPin;
 
--(id)initWithNibName:(NSString *)nibName mapView:(MKMapView *)mapView annotation:(DroppedPinModel*)droppedPin;
+-(id)initWithNibName:(NSString *)nibName mapView:(MKMapView *)mapView annotation:(Drop*)droppedPin;
 
 @end

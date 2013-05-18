@@ -7,7 +7,8 @@
 //
 
 #import "DroppedPinViewController.h"
-#import "DroppedPinModel.h"
+#import "Drop.h"
+#import "AppDelegate.h"
 
 @interface DroppedPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
@@ -16,7 +17,7 @@
 
 @implementation DroppedPinViewController
 
--(id)initWithNibName:(NSString *)nibName mapView:(MKMapView *)mapView annotation:(DroppedPinModel*)droppedPin {
+-(id)initWithNibName:(NSString *)nibName mapView:(MKMapView *)mapView annotation:(Drop*)droppedPin {
     self = [super initWithNibName:nibName bundle:nil];
     if (self) {
         _mapView = mapView;
@@ -25,14 +26,14 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    PFObject *object = [_droppedPin object];
     [_label setText:[self findFiles]];
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

@@ -10,6 +10,7 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "TestFlight.h"
 #import <Parse/Parse.h>
+#import "FTASync.h"
 
 @implementation AppDelegate
 
@@ -21,11 +22,25 @@
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     [TestFlight takeOff:@"490688de-870a-47bd-93ae-eab1185b43fa"];
     
-//    PFACL *defaultACL = [PFACL ACL];
-//    [defaultACL setPublicReadAccess:YES];
-//    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
+    [FTASyncHandler sharedInstance];
+    
+    PFACL *defaultACL = [PFACL ACL];
+    [defaultACL setPublicReadAccess:YES];
+    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
     
     return YES;
+}
+
+- (void)setCurrentLocation:(CLLocation *)currentLocation
+{
+	_currentLocation = currentLocation;
+    
+	// Notify the app of the location change:
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:currentLocation forKey:kParseLocationKey];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"LocationNotification" object:nil userInfo:userInfo];
+	});
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
