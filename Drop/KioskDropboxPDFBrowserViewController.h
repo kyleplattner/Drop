@@ -25,7 +25,7 @@
 @property (nonatomic) id <KioskDropboxPDFBrowserViewControllerUIDelegate> uiDelegate;
 
 // List content of home directory in a tableview. Alert if application is not linked to dropbox
-- (void) listDropboxDirectory;
+- (void)listDropboxDirectory;
 
 //Display the Viewer
 + (void)displayDropboxBrowserInPhoneStoryboard:(UIStoryboard *)iPhoneStoryboard displayDropboxBrowserInPadStoryboard:(UIStoryboard *)iPadStoryboard onView:(UIViewController *)viewController withPresentationStyle:(UIModalPresentationStyle)presentationStyle withTransitionStyle:(UIModalTransitionStyle)transitionStyle withDelegate:(id<KioskDropboxPDFBrowserViewControllerUIDelegate>)delegate;

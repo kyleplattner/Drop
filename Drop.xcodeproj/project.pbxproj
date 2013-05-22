@@ -90,7 +90,6 @@
 		EBCE27511736ED8600A63696 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27501736ED8600A63696 /* MobileCoreServices.framework */; };
 		EBCE27531736ED9000A63696 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27521736ED9000A63696 /* SystemConfiguration.framework */; };
 		EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF331FD1730797B006D690E /* QuartzCore.framework */; };
-		EBF332071731A833006D690E /* DroppedPinModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332061731A833006D690E /* DroppedPinModel.m */; };
 		EBF3320A1731C32B006D690E /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332091731C32B006D690E /* MapViewDelegate.m */; };
 		EBF3320E1731C4C1006D690E /* DroppedPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */; };
 		EBF3320F1731C4C1006D690E /* DroppedPinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBF3320D1731C4C1006D690E /* DroppedPinViewController.xib */; };
@@ -116,6 +115,8 @@
 		EBF33366173566B6006D690E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF33365173566B6006D690E /* SettingsViewController.m */; };
 		EBF3336917356BD1006D690E /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */; };
 		EBF3336A17356BD1006D690E /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */; };
+		EBFFF6271748674A00BCDB33 /* PreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFFF6261748674A00BCDB33 /* PreviewController.m */; };
+		EBFFF62917486A1E00BCDB33 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBFFF62817486A1D00BCDB33 /* QuickLook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,8 +250,6 @@
 		EBCE27501736ED8600A63696 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EBCE27521736ED9000A63696 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EBF331FD1730797B006D690E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		EBF332051731A833006D690E /* DroppedPinModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppedPinModel.h; sourceTree = "<group>"; };
-		EBF332061731A833006D690E /* DroppedPinModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroppedPinModel.m; sourceTree = "<group>"; };
 		EBF332081731C32B006D690E /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
 		EBF332091731C32B006D690E /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
 		EBF3320B1731C4C1006D690E /* DroppedPinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroppedPinViewController.h; sourceTree = "<group>"; };
@@ -283,6 +282,9 @@
 		EBF33365173566B6006D690E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		EBFFF6251748674900BCDB33 /* PreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewController.h; sourceTree = "<group>"; };
+		EBFFF6261748674A00BCDB33 /* PreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewController.m; sourceTree = "<group>"; };
+		EBFFF62817486A1D00BCDB33 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBFFF62917486A1E00BCDB33 /* QuickLook.framework in Frameworks */,
 				EB15614217427DA400468E6B /* CoreData.framework in Frameworks */,
 				EBCE27531736ED9000A63696 /* SystemConfiguration.framework in Frameworks */,
 				EBCE27511736ED8600A63696 /* MobileCoreServices.framework in Frameworks */,
@@ -468,6 +471,7 @@
 		EB4DD12B172DE5CF001D3070 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBFFF62817486A1D00BCDB33 /* QuickLook.framework */,
 				EB15614117427DA300468E6B /* CoreData.framework */,
 				EBCE27521736ED9000A63696 /* SystemConfiguration.framework */,
 				EBCE27501736ED8600A63696 /* MobileCoreServices.framework */,
@@ -501,8 +505,6 @@
 				EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */,
 				EB4DD147172DE5CF001D3070 /* ViewController.h */,
 				EB4DD148172DE5CF001D3070 /* ViewController.m */,
-				EBF332051731A833006D690E /* DroppedPinModel.h */,
-				EBF332061731A833006D690E /* DroppedPinModel.m */,
 				EB0251D2174450C20036527B /* Drop.h */,
 				EB0251D3174450C20036527B /* Drop.m */,
 				EBF332081731C32B006D690E /* MapViewDelegate.h */,
@@ -518,6 +520,8 @@
 				EB1560B0173DA69B00468E6B /* SignUpViewController.m */,
 				EB1560D917402F6D00468E6B /* DropboxDelegate.h */,
 				EB1560DA17402F6D00468E6B /* DropboxDelegate.m */,
+				EBFFF6251748674900BCDB33 /* PreviewController.h */,
+				EBFFF6261748674A00BCDB33 /* PreviewController.m */,
 				EBF33363173564FB006D690E /* Dropbox */,
 				EB4DD133172DE5CF001D3070 /* Supporting Files */,
 			);
@@ -742,7 +746,6 @@
 				EB4DD139172DE5CF001D3070 /* main.m in Sources */,
 				EB4DD13D172DE5CF001D3070 /* AppDelegate.m in Sources */,
 				EB4DD149172DE5CF001D3070 /* ViewController.m in Sources */,
-				EBF332071731A833006D690E /* DroppedPinModel.m in Sources */,
 				EBF3320A1731C32B006D690E /* MapViewDelegate.m in Sources */,
 				EBF3320E1731C4C1006D690E /* DroppedPinViewController.m in Sources */,
 				EBF3335F173564F4006D690E /* KioskDropboxPDFBrowserViewController.m in Sources */,
@@ -789,6 +792,7 @@
 				EB15614517427DF400468E6B /* _FTASyncParent.m in Sources */,
 				EB1561481742C5AC00468E6B /* Model.xcdatamodeld in Sources */,
 				EB0251D4174450C20036527B /* Drop.m in Sources */,
+				EBFFF6271748674A00BCDB33 /* PreviewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

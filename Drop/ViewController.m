@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "DroppedPinModel.h"
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import <Parse/Parse.h>

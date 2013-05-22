@@ -21,6 +21,7 @@
 
 - (IBAction)setupButtonPressed:(id)sender;
 - (IBAction)logOutButtonPressed:(id)sender;
+- (IBAction)unlinkDropboxButtonPressed:(id)sender;
 - (void)setupDelegate:(NSNotification*)notification;
 
 @end
@@ -90,6 +91,11 @@
     [signUpViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [signUpViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (IBAction)unlinkDropboxButtonPressed:(id)sender {
+    [[DBSession sharedSession] unlinkAll];
+    [[DBSession sharedSession] linkFromController:self];
 }
 
 - (void)setupDelegate:(NSNotification*)notification {

@@ -19,7 +19,6 @@
 @property (nonatomic, assign) BOOL mapPinsPlaced;
 @property (nonatomic, strong) NSMutableArray *allPosts;
 @property (nonatomic, strong) NSMutableArray *annotations;
-@property (nonatomic, copy) NSString *className;
 @end
 
 @implementation MapViewDelegate
@@ -31,7 +30,6 @@
         _view = view;
         _annotations = [[NSMutableArray alloc] initWithCapacity:100];
 		_allPosts = [[NSMutableArray alloc] initWithCapacity:100];
-        _className = kParsePostsClassKey;
         [self startStandardUpdates];
         [self queryForAllPosts];
     }
@@ -40,12 +38,13 @@
 
 -(void)dealloc {
     [_locationManager stopUpdatingLocation];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.mapPinsPlaced = NO;
 }
 
 - (void)mapView:(MKMapView *)MapView didSelectAnnotationView:(MKAnnotationView *)view {
-    Drop *drop = view.annotation;
-    DroppedPinViewController *droppedPinView = [[DroppedPinViewController alloc]initWithNibName:@"DroppedPinViewController" mapView:self.mapView annotation:(Drop*)view.annotation];
+    _droppedPin = view.annotation;
+    DroppedPinViewController *droppedPinView = [[DroppedPinViewController alloc]initWithNibName:@"DroppedPinViewController" mapView:self.mapView annotation:_droppedPin];
     if (self.popoverController == nil) {
         UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:droppedPinView];
         popover.delegate = self;
@@ -69,15 +68,23 @@
         MKPinAnnotationView* view = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:kIdentifier];
 		if (!view) {
 			view = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kIdentifier];
+            view.pinColor = MKPinAnnotationColorGreen;
 		}
 		else {
 			view.annotation = annotation;
 		}
-        if ([[[PFUser currentUser] username] isEqualToString:[[PFUser currentUser] username]]) {
-            view.pinColor = MKPinAnnotationColorGreen;
-        } else {
-            view.pinColor = MKPinAnnotationColorRed;
-        }
+        Drop *drop = view.annotation;
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        [query includeKey:kParseUserKey];
+        PFObject *object = [query getObjectWithId:drop.object.objectId];
+        PFUser *user = [object objectForKey:kParseUserKey];
+        [object fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if ([[[PFUser currentUser] username] isEqualToString:[user username]]) {
+                view.pinColor = MKPinAnnotationColorGreen;
+            } else {
+                view.pinColor = MKPinAnnotationColorRed;
+            }
+        }];
 		view.animatesDrop = YES;
 		return view;
     }
@@ -86,8 +93,7 @@
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     for(MKPinAnnotationView *eachView in views) {
-        [eachView setAnimatesDrop:YES];
-        [eachView setDraggable:YES];
+        NSLog(@"");
     }
 }
 
@@ -117,22 +123,15 @@
 #pragma mark - Fetch map pins
 
 - (void)queryForAllPosts {
-	PFQuery *query = [PFQuery queryWithClassName:_className];
+	PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
 	if ([self.allPosts count] == 0) {
 		query.cachePolicy = kPFCachePolicyCacheThenNetwork;
 	}
-    
-//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-//	PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:appDelegate.currentLocation.coordinate.latitude longitude:appDelegate.currentLocation.coordinate.longitude];
-//	[query whereKey:kParseLocationKey nearGeoPoint:point withinMiles:9999];
-//	[query includeKey:kParseUserKey];
-    
 	[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 		if (error) {
 			NSLog(@"%@", [error localizedDescription]); // todo why is this ever happening?
 		} else {
 			NSMutableArray *newPosts = [[NSMutableArray alloc] initWithCapacity:100];
-			// (Cache the objects we make for the search in step 2:)
 			NSMutableArray *allNewPosts = [[NSMutableArray alloc] initWithCapacity:100];
 			for (PFObject *object in objects) {
 				Drop *drop = [[Drop alloc] initWithDrop:object];
@@ -160,12 +159,10 @@
 					[postsToRemove addObject:currentPost];
 				}
 			}
-
 			[_mapView removeAnnotations:postsToRemove];
 			[_mapView addAnnotations:newPosts];
 			[_allPosts addObjectsFromArray:newPosts];
 			[_allPosts removeObjectsInArray:postsToRemove];
-            
 			self.mapPinsPlaced = YES;
 		}
 	}];
@@ -177,10 +174,8 @@
 	if (nil == _locationManager) {
 		_locationManager = [[CLLocationManager alloc] init];
 	}
-    
 	_locationManager.delegate = self;
 	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    
 	// Set a movement threshold for new events.
 	_locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
     
@@ -246,6 +241,5 @@
 		[alert show];
 	}
 }
-
 
 @end

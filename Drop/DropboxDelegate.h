@@ -11,8 +11,9 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import <AssetsLibrary/ALAsset.h>
 #import "Drop.h"
+#import "MBProgressHUD.h"
 
-@interface DropboxDelegate : NSObject <KioskDropboxPDFBrowserViewControllerUIDelegate, DBRestClientDelegate, UINavigationControllerDelegate>
+@interface DropboxDelegate : NSObject <KioskDropboxPDFBrowserViewControllerUIDelegate, DBRestClientDelegate, UINavigationControllerDelegate, MBProgressHUDDelegate>
 
 @property (nonatomic, retain) UIViewController* view;
 @property (nonatomic, retain) Drop *drop;

@@ -9,10 +9,12 @@
 #import "DropboxDelegate.h"
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "MBProgressHUD.h"
 
 @interface DropboxDelegate () {
     DBRestClient *restClient;
 }
+- (void)postFileWithName:(NSString *)name atPath:(NSString *)path;
 @end
 
 @implementation DropboxDelegate
@@ -31,42 +33,64 @@
 
 - (void)refreshLibrarySection {
     NSLog(@"Final Filename: %@", [KioskDropboxPDFRootViewController fileName]);
-    
     NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString* localPath = [documentsPath stringByAppendingPathComponent:[KioskDropboxPDFRootViewController fileName]];
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
-        NSData *data = [NSData dataWithContentsOfFile:localPath];
-        PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:_drop.coordinate.latitude longitude:_drop.coordinate.longitude];
-        PFUser *user = [PFUser currentUser];
-        PFObject *postObject = [PFObject objectWithClassName:kParsePostsClassKey];
-        [postObject setObject:user forKey:kParseUserKey];
-        [postObject setObject:currentPoint forKey:kParseLocationKey];
-        [postObject setObject:data forKey:kParseFileKey];
-        [_drop setDropBoxFile:postObject];
-        PFACL *readOnlyACL = [PFACL ACL];
-        [readOnlyACL setPublicReadAccess:YES];
-        [readOnlyACL setPublicWriteAccess:NO];
-        [postObject setACL:readOnlyACL];
-        [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (error) {
-                NSLog(@"Couldn't save!");
-                NSLog(@"%@", error);
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-                [alertView show];
-                return;
-            }
-            if (succeeded) {
-                NSLog(@"Successfully saved!");
-                NSLog(@"%@", postObject);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"PostCreatedNotification" object:nil];
-                });
-            } else {
-                NSLog(@"Failed to save.");
-            }
-        }];
+        [_drop setUrl:localPath];
+        [self postFileWithName:[KioskDropboxPDFRootViewController fileName] atPath:localPath];
     }
     [self removeDropboxBrowser];
+}
+
+- (void)postFileWithName:(NSString *)name atPath:(NSString *)path {
+    PFFile *file = [PFFile fileWithName:name contentsAtPath:path];
+    [_drop setDropBoxFile:file];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:_view.view animated:YES];
+    HUD.mode = MBProgressHUDModeDeterminate;
+    HUD.labelText = @"Tagging";
+    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:_drop.coordinate.latitude longitude:_drop.coordinate.longitude];
+            PFUser *user = [PFUser currentUser];
+            PFObject *postObject = [PFObject objectWithClassName:kParsePostsClassKey];
+            [postObject setObject:user forKey:kParseUserKey];
+            [postObject setObject:currentPoint forKey:kParseLocationKey];
+            [postObject setObject:file forKey:kParseFileKey];
+            [_drop setUser:user];
+            [_drop setObject:postObject];
+            [_drop setGeopoint:currentPoint];
+            PFACL *readOnlyACL = [PFACL ACL];
+            [readOnlyACL setPublicReadAccess:YES];
+            [readOnlyACL setPublicWriteAccess:NO];
+            [postObject setACL:readOnlyACL];
+            [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error) {
+                    [HUD hide:YES];
+                    NSLog(@"Couldn't save!");
+                    NSLog(@"%@", error);
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[error userInfo] objectForKey:@"error"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+                    [alertView show];
+                    return;
+                }
+                if (succeeded) {
+                    [HUD hide:YES];
+                    NSLog(@"Successfully saved!");
+                    NSLog(@"%@", postObject);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadAnnoationsNotification" object:nil];
+                    });
+                } else {
+                    NSLog(@"Failed to save.");
+                }
+            }];
+        }
+        else{
+            [HUD hide:YES];
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    } progressBlock:^(int percentDone) {
+        HUD.progress = (float)percentDone/100;
+    }];
 }
 
 @end

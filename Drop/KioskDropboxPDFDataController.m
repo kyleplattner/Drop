@@ -49,22 +49,18 @@
 
 - (BOOL) downloadFile:(DBMetadata *)file {
     BOOL res = FALSE;
-
     if (!file.isDirectory) {
-        
         NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         NSString* localPath = [documentsPath stringByAppendingPathComponent:file.filename];
         if(![[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
-            
             if ([[self dataDelegate] respondsToSelector:@selector(startDownloadFile)])
                 [[self dataDelegate] startDownloadFile];
-            
             res = TRUE;
             [[self restClient] loadFile:file.path intoPath:localPath];
         }
         else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Note"
-                                                                message:@"That file was already downloaded. It exists locally."
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select Another File"
+                                                                message:@"That file has already been tagged with a location."
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
@@ -91,12 +87,10 @@
 #pragma mark DBRestClientDelegate methods
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata {
     NSMutableArray *dirList = [[NSMutableArray alloc] init];
-    
     if (metadata.isDirectory) {
         for (DBMetadata *file in metadata.contents) {
-            // check if directory or pdf document
-            if ([file isDirectory] || ![file.filename hasSuffix:@".exe"]) {
-                // push new tableviewcontroller
+            NSLog(@"file name %@ is %lld", [file filename], [file totalBytes]);
+            if ([file isDirectory] || ![file.filename hasSuffix:@".exe"] || ![file totalBytes] > 10000000) {
                 [dirList addObject:file];
             }
         }
@@ -115,7 +109,6 @@
 }
 
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath {
-
     if ([[self dataDelegate] respondsToSelector:@selector(downloadedFile)])
         [[self dataDelegate] downloadedFile];
 
@@ -127,7 +120,6 @@
 }
 
 - (void)restClient:(DBRestClient*)client loadProgress:(CGFloat)progress forFile:(NSString*)destPath {
-    
     if ([[self dataDelegate] respondsToSelector:@selector(updateDownloadProgressTo:)])
         [[self dataDelegate] updateDownloadProgressTo:progress];
 }

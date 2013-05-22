@@ -31,7 +31,6 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ws-9O-fqW" customClass="BButton">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="221" id="2yj-ti-EKa"/>
                                     <constraint firstAttribute="height" constant="45" id="Pdy-u0-2jC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
@@ -47,14 +46,35 @@
                                     <action selector="setupButtonPressed:" destination="rLH-X2-dpA" eventType="touchUpInside" id="cvf-Yd-3NE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnX-a4-wQn" customClass="BButton">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="qoF-sk-Tf5"/>
+                                    <constraint firstAttribute="width" constant="221" id="vR9-uq-gSQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <size key="titleShadowOffset" width="0.0" height="1"/>
+                                <state key="normal" title="Log Out of Dropbox">
+                                    <color key="titleColor" red="0.26824700340000002" green="0.26824700340000002" blue="0.26824700340000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="unlinkDropboxButtonPressed:" destination="rLH-X2-dpA" eventType="touchUpInside" id="UkI-OF-CIj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4ws-9O-fqW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="BiW-LD-RiL"/>
                             <constraint firstAttribute="trailing" secondItem="kIP-VC-kFa" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="XT2-4n-566"/>
+                            <constraint firstItem="pnX-a4-wQn" firstAttribute="leading" secondItem="4ws-9O-fqW" secondAttribute="leading" type="default" id="YQm-Iu-RtG"/>
                             <constraint firstItem="4ws-9O-fqW" firstAttribute="leading" secondItem="kIP-VC-kFa" secondAttribute="leading" type="default" id="cIZ-Cb-eWq"/>
                             <constraint firstAttribute="bottom" secondItem="kIP-VC-kFa" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="hfv-hc-gp1"/>
                             <constraint firstItem="kIP-VC-kFa" firstAttribute="top" secondItem="4ws-9O-fqW" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="jjf-WW-JCk"/>
+                            <constraint firstAttribute="trailing" secondItem="pnX-a4-wQn" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="mZ7-E8-aia"/>
+                            <constraint firstItem="4ws-9O-fqW" firstAttribute="top" secondItem="pnX-a4-wQn" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ytG-K8-7Tb"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -112,6 +132,30 @@
     <resources>
         <image name="settingsIcon.png" width="50" height="50"/>
     </resources>
+    <classes>
+        <class className="BButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BButton.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="logOutButtonPressed:"/>
+                <relationship kind="action" name="setupButtonPressed:"/>
+                <relationship kind="action" name="unlinkDropboxButtonPressed:"/>
+                <relationship kind="outlet" name="dropBoxButton" candidateClass="BButton"/>
+            </relationships>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="settingsButtonPressed:"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

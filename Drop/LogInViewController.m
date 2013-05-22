@@ -24,7 +24,6 @@
     [self.logInView.signUpLabel setHidden:YES];
     [self.logInView.usernameField setTextColor:[UIColor colorWithRed:0.200 green:0.196 blue:0.188 alpha:1.000]];
     [self.logInView.passwordField setTextColor:[UIColor colorWithRed:0.200 green:0.196 blue:0.188 alpha:1.000]];
-
 }
 
 - (void)viewDidLayoutSubviews {

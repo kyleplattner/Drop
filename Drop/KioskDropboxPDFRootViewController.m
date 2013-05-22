@@ -61,18 +61,13 @@ static NSString* currentFileName = nil;
     return currentFileName;
 }
 
-- (BOOL) listHomeDirectory {
-    
-    // start progress indicator
+- (BOOL)listHomeDirectory {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
     self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.hud.labelText = @"Retrieving Data...";
     [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
-    
     [self.dataController listHomeDirectory];
-    
     return TRUE;
 }
 
@@ -90,17 +85,16 @@ static NSString* currentFileName = nil;
 {
     [super viewDidLoad];
     
-    self.title = @"Dropbox Browser";
-    
+    self.title = @"Select File to Drop";
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                   style:UIBarButtonSystemItemDone target:self action:@selector(moveToParentDirectory)];
+                                                                   style:UIBarButtonItemStyleBordered target:self action:@selector(moveToParentDirectory)];
 
     self.navigationItem.leftBarButtonItem = leftButton;
     self.currentPath = @"/";
     
     // add progressview
     UIProgressView *newProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-    newProgressView.frame = CGRectMake(80, 17, 150, 30);
+    newProgressView.frame = CGRectMake(190, 17, 150, 30);
     newProgressView.hidden = TRUE;
     [self.parentViewController.view addSubview:newProgressView];
     
@@ -126,11 +120,11 @@ static NSString* currentFileName = nil;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    #warning make sure you're using the correct UITableViewCell identifier including gui items
     static NSString *CellIdentifier = @"KioskDropboxBrowserCell";
     UITableViewCell *cell = nil;
+    //[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+
     cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     // Configure the cell...
     DBMetadata *file = (DBMetadata*)[self.dataController.list objectAtIndex:indexPath.row];
     
@@ -147,15 +141,12 @@ static NSString* currentFileName = nil;
         }
     }
     
-    // add custom button
     UIButton *customDownloadbutton = nil;
-    // if folder
     if ([file isDirectory]) {
         cell.imageView.image = [UIImage imageNamed:@"dropboxDirIcon.png"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Dir"];
         customDownloadbutton = [self makeDetailDisclosureButton:DisclosureDirType];
     }
-    // if pdf doc
     else if (![file.filename hasSuffix:@".exe"]){
         cell.imageView.image = [UIImage imageNamed:@"pdfFileIcon.png"];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"File Size: %@", file.humanReadableSize];   
@@ -243,7 +234,7 @@ static NSString* currentFileName = nil;
     return ( button );
 }
 
-- (void) accessoryButtonTapped: (UIControl *) button withEvent: (UIEvent *) event {
+- (void)accessoryButtonTapped: (UIControl *) button withEvent: (UIEvent *) event {
     
     NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint: [[[event touchesForView: button] anyObject] locationInView: self.tableView]];
     if ( indexPath == nil )
@@ -269,7 +260,7 @@ static NSString* currentFileName = nil;
         
         [[self dataController] listDirectoryAtPath:subpath];
     }
-    else if (![file.filename hasSuffix:@".exe"]) {
+    else if (![file.filename hasSuffix:@".exe"] && [file totalBytes] < 10000000) {
         UITableViewCell *tcell = [self.tableView cellForRowAtIndexPath:indexPath];
         for (int i = 0; i < [tcell.subviews count]; i++) {
             UIButton* tView = (UIButton*)[tcell.subviews objectAtIndex:i];
@@ -279,11 +270,17 @@ static NSString* currentFileName = nil;
             }
         }
         
-        
         // download file
         [[self dataController] downloadFile:file];
         currentFileName = file.filename;
         
+    } else if ([file totalBytes] >= 10000000) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"File Too Large"
+                                                            message:@"Drop does not work with files larger than 10MB."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
@@ -318,7 +315,7 @@ static NSString* currentFileName = nil;
         [self performSelector:@selector(timeout:) withObject:nil afterDelay:30.0];
         
         [[self dataController] listDirectoryAtPath:subpath];
-    } else if (![file.filename hasSuffix:@".exe"]) {
+    } else if (![file.filename hasSuffix:@".exe"] && [file totalBytes] < 10000000) {
         UITableViewCell *tcell = [self.tableView cellForRowAtIndexPath:indexPath];
         for (int i = 0; i < [tcell.subviews count]; i++) {
             UIButton* tView = (UIButton*)[tcell.subviews objectAtIndex:i];
@@ -331,6 +328,14 @@ static NSString* currentFileName = nil;
         // download file
         [[self dataController] downloadFile:file];
         currentFileName = file.filename;
+        
+    } else if ([file totalBytes] >= 10000000) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"File Too Large"
+                                                            message:@"Drop does not work with files larger than 10MB."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -350,6 +355,7 @@ static NSString* currentFileName = nil;
 
 - (void)downloadedFile {
     [self.downloadProgressView setHidden:TRUE];
+    self.title = @"Select File to Drop";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Added to Location"
                                                         message:@"The File has been sucessfully added to this location."
                                                        delegate:nil
@@ -363,13 +369,15 @@ static NSString* currentFileName = nil;
 
 - (void) startDownloadFile {
     [self.downloadProgressView setHidden:FALSE];
+    self.title = @"";
 }
 
 - (void) downloadedFileFailed {
     [self.downloadProgressView setHidden:TRUE];
+    self.title = @"Select File to Drop";
 }
 
-- (void) updateDownloadProgressTo:(CGFloat) progress {
+- (void) updateDownloadProgressTo:(CGFloat)progress {
     [self.downloadProgressView setProgress:progress];
 }
 

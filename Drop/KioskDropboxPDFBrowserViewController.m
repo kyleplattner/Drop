@@ -70,10 +70,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                    style:UIBarButtonSystemItemDone target:self action:@selector(removeDropboxBrowser)];
+//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+//                                                                    style:UIBarButtonItemStyleBordered target:self action:@selector(removeDropboxBrowser)];
 //    self.navigationItem.rightBarButtonItem = rightButton;
-    self.topViewController.navigationItem.rightBarButtonItem = rightButton;
+//    self.topViewController.navigationItem.rightBarButtonItem = rightButton;
     
     KioskDropboxPDFRootViewController *tController = (KioskDropboxPDFRootViewController *)[[self viewControllers]objectAtIndex:0];
     self.rootViewController = tController;
@@ -89,9 +89,7 @@
 
 + (void)displayDropboxBrowserInPhoneStoryboard:(UIStoryboard *)iPhoneStoryboard displayDropboxBrowserInPadStoryboard:(UIStoryboard *)iPadStoryboard onView:(UIViewController *)viewController withPresentationStyle:(UIModalPresentationStyle)presentationStyle withTransitionStyle:(UIModalTransitionStyle)transitionStyle withDelegate:(id<KioskDropboxPDFBrowserViewControllerUIDelegate>)delegate
 {
-    //The session has already been linked
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        //The user is on an iPhone - link the correct storyboard below
         KioskDropboxPDFBrowserViewController *targetController = [iPhoneStoryboard instantiateViewControllerWithIdentifier:@"KioskDropboxPDFBrowserViewControllerID"];
         
         targetController.modalPresentationStyle = presentationStyle;
@@ -113,9 +111,7 @@
         [targetController listDropboxDirectory];
         
     } else {
-        //The user is on an iPhone - link the correct storyboard below
         KioskDropboxPDFBrowserViewController *targetController = [iPadStoryboard instantiateViewControllerWithIdentifier:@"KioskDropboxPDFBrowserViewControllerID"];
-        
         targetController.modalPresentationStyle = presentationStyle;
         targetController.modalTransitionStyle = transitionStyle;
         [viewController presentViewController:targetController animated:YES completion:nil];

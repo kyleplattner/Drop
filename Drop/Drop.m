@@ -11,11 +11,10 @@
 
 @interface Drop ()
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-@property (nonatomic, copy) NSString *uuid;
-@property (nonatomic, strong) PFObject *object;
-@property (nonatomic, strong) PFGeoPoint *geopoint;
-@property (nonatomic, strong) PFUser *user;
-//add pffile
+//@property (nonatomic, strong) PFObject *object;
+//@property (nonatomic, strong) PFGeoPoint *geopoint;
+//@property (nonatomic, strong) PFUser *user;
+//@property (nonatomic, strong) PFFile *file;
 @end
 
 @implementation Drop
@@ -29,8 +28,7 @@
         [self.geopoint setLongitude:coordinate.longitude];
         self.user = [PFUser currentUser];
         self.user.username = [[PFUser currentUser] username];
-        NSUUID  *UUID = [NSUUID UUID];
-        self.uuid = [UUID UUIDString];
+        self.file = nil;
     }
     return self;
 }
@@ -45,10 +43,8 @@
         _coordinate = location;
         [self setCoordinate:_coordinate];
         self.user = [object objectForKey:kParseUserKey];
-        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(self.geopoint.latitude, self.geopoint.longitude);
-        self.coordinate = coordinate;
-        NSUUID  *UUID = [NSUUID UUID];
-        self.uuid = [UUID UUIDString];
+        self.coordinate = location;
+        self.file = [object objectForKey:kParseFileKey];
     }
     return self;
 }
@@ -57,15 +53,12 @@
 	if (drop == nil) {
 		return NO;
 	}
-    
 	if (drop.object && self.object) {
 		if ([drop.object.objectId compare:self.object.objectId] != NSOrderedSame) {
 			return NO;
 		}
 		return YES;
 	} else {
-		NSLog(@"%s Testing equality of Drops where one or both objects lack a backing PFObject", __PRETTY_FUNCTION__);
-        
 		if (drop.coordinate.latitude != self.coordinate.latitude || drop.coordinate.longitude != self.coordinate.longitude) {
 			return NO;
 		}
@@ -73,8 +66,16 @@
 	}
 }
 
-- (void)setDropBoxFile:(PFObject *)object {
-    self.object = object;
+- (void)setDropBoxFile:(PFFile *)file {
+    self.file = file;
+}
+
+- (NSString *)getUsername {
+    PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+    [query includeKey:kParseUserKey];
+    PFObject *object = [query getObjectWithId:self.object.objectId];
+    PFUser *testUser = [object objectForKey:kParseUserKey];
+    return testUser.username;
 }
 
 @end

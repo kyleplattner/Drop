@@ -11,7 +11,6 @@
 
 static NSString * const kParsePostsClassKey = @"Drop";
 static NSString * const kParseUserKey = @"user";
-static NSString * const kParseUsernameKey = @"username";
 static NSString * const kParseLocationKey = @"location";
 static NSString * const kParseFileKey = @"file";
 

@@ -13,14 +13,16 @@
 @interface Drop : NSObject <MKAnnotation>
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
-@property (nonatomic, readonly, copy) NSString *uuid;
-@property (nonatomic, readonly, strong) PFObject *object;
-@property (nonatomic, readonly, strong) PFGeoPoint *geopoint;
-@property (nonatomic, readonly, strong) PFUser *user;
+@property (nonatomic, retain) PFObject *object;
+@property (nonatomic, retain) PFGeoPoint *geopoint;
+@property (nonatomic, retain) PFUser *user;
+@property (nonatomic, retain) PFFile *file;
+@property (nonatomic, retain) NSString *url;
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
 - (id)initWithDrop:(PFObject *)object;
-- (void)setDropBoxFile:(PFObject *)object;
+- (void)setDropBoxFile:(PFFile *)file;
 - (BOOL)equalToDrop:(Drop *)drop;
+- (NSString *)getUsername;
 
 @end
