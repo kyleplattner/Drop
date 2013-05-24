@@ -73,18 +73,18 @@
 		else {
 			view.annotation = annotation;
 		}
-        Drop *drop = view.annotation;
-        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-        [query includeKey:kParseUserKey];
-        PFObject *object = [query getObjectWithId:drop.object.objectId];
-        PFUser *user = [object objectForKey:kParseUserKey];
-        [object fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-            if ([[[PFUser currentUser] username] isEqualToString:[user username]]) {
-                view.pinColor = MKPinAnnotationColorGreen;
-            } else {
-                view.pinColor = MKPinAnnotationColorRed;
-            }
-        }];
+//        Drop *drop = view.annotation;
+//        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+//        [query includeKey:kParseUserKey];
+//        PFObject *object = [query getObjectWithId:drop.object.objectId];
+//        PFUser *user = [object objectForKey:kParseUserKey];
+//        [object fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//            if ([[[PFUser currentUser] username] isEqualToString:[user username]]) {
+//                view.pinColor = MKPinAnnotationColorGreen;
+//            } else {
+//                view.pinColor = MKPinAnnotationColorRed;
+//            }
+//        }];
 		view.animatesDrop = YES;
 		return view;
     }
