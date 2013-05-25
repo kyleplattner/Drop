@@ -17,7 +17,6 @@
 @property (nonatomic, weak, readonly) UIViewController* view;
 @property (nonatomic, retain) UIPopoverController* popoverController;
 @property (nonatomic, retain) Drop* droppedPin;
-//@property (nonatomic, retain) DropboxDelegate* dropBoxDelegate; 
 
 - (id)initWithMapView:(MKMapView*)mapView viewController:(UIViewController*)view;
 - (void)startStandardUpdates;

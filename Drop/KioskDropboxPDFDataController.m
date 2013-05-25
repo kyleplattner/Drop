@@ -30,7 +30,7 @@
 @implementation KioskDropboxPDFDataController
 
 #pragma mark - public functions
-- (BOOL) listDirectoryAtPath:(NSString*)path {
+- (BOOL)listDirectoryAtPath:(NSString*)path {
     if ([self isDropboxLinked]) {
         [[self restClient] loadMetadata:path];
         return TRUE;
@@ -39,15 +39,15 @@
         return FALSE;
     }
 }
-- (BOOL) listHomeDirectory {
+- (BOOL)listHomeDirectory {
     return [self listDirectoryAtPath:@"/"];
 }
 
-- (BOOL) isDropboxLinked {
+- (BOOL)isDropboxLinked {
     return [[DBSession sharedSession] isLinked];
 }
 
-- (BOOL) downloadFile:(DBMetadata *)file {
+- (BOOL)downloadFile:(DBMetadata *)file {
     BOOL res = FALSE;
     if (!file.isDirectory) {
         NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -59,23 +59,11 @@
             [[self restClient] loadFile:file.path intoPath:localPath];
         }
         else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select Another File"
-                                                                message:@"That file has already been tagged with a location."
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select Another File" message:@"That file has already been tagged with a location."  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
         }
     }
-        
     return res;
-}
-
-#pragma mark - init 
-- (id)init {
-    if (self = [super init]) {
-    }
-    return self;
 }
 
 - (void)setList:(NSMutableArray *)newList {
@@ -95,7 +83,6 @@
             }
         }
     }
-    
     self.list = dirList;
     
     if ([[self dataDelegate] respondsToSelector:@selector(updateTableData)])
@@ -105,13 +92,11 @@
 - (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error {
     if ([[self dataDelegate] respondsToSelector:@selector(updateTableData)])
         [[self dataDelegate] updateTableData];
-    
 }
 
 - (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath {
     if ([[self dataDelegate] respondsToSelector:@selector(downloadedFile)])
         [[self dataDelegate] downloadedFile];
-
 }
 
 - (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error {
@@ -123,7 +108,6 @@
     if ([[self dataDelegate] respondsToSelector:@selector(updateDownloadProgressTo:)])
         [[self dataDelegate] updateDownloadProgressTo:progress];
 }
-
 
 #pragma mark - synthesize stuff
 @synthesize dataDelegate;

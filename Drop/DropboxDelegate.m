@@ -53,16 +53,19 @@
             PFGeoPoint *currentPoint = [PFGeoPoint geoPointWithLatitude:_drop.coordinate.latitude longitude:_drop.coordinate.longitude];
             PFUser *user = [PFUser currentUser];
             PFObject *postObject = [PFObject objectWithClassName:kParsePostsClassKey];
+            NSArray *sharedUsers = [[NSArray alloc] initWithObjects:[user username], nil];
             [postObject setObject:user forKey:kParseUserKey];
             [postObject setObject:currentPoint forKey:kParseLocationKey];
             [postObject setObject:file forKey:kParseFileKey];
+            [postObject setObject:name forKey:kParseFilenameKey];
+            [postObject setObject:[user username] forKey:kParseUsernameKey];
+            [postObject setObject:sharedUsers forKey:kParseSharedUserArrayKey];
             [_drop setUser:user];
             [_drop setObject:postObject];
             [_drop setGeopoint:currentPoint];
-            PFACL *readOnlyACL = [PFACL ACL];
-            [readOnlyACL setPublicReadAccess:YES];
-            [readOnlyACL setPublicWriteAccess:NO];
-            [postObject setACL:readOnlyACL];
+            [_drop setFilename:name];
+            [_drop setUsername:[user username]];
+            [_drop setSharedUsers:sharedUsers];
             [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (error) {
                     [HUD hide:YES];

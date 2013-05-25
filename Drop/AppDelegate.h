@@ -13,6 +13,9 @@ static NSString * const kParsePostsClassKey = @"Drop";
 static NSString * const kParseUserKey = @"user";
 static NSString * const kParseLocationKey = @"location";
 static NSString * const kParseFileKey = @"file";
+static NSString * const kParseFilenameKey = @"filename";
+static NSString * const kParseUsernameKey = @"username";
+static NSString * const kParseSharedUserArrayKey = @"users";
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

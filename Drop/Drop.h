@@ -18,11 +18,17 @@
 @property (nonatomic, retain) PFUser *user;
 @property (nonatomic, retain) PFFile *file;
 @property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *filename;
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSArray *sharedUsers;
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate;
 - (id)initWithDrop:(PFObject *)object;
 - (void)setDropBoxFile:(PFFile *)file;
 - (BOOL)equalToDrop:(Drop *)drop;
+- (BOOL)canUserSeeDrop:(Drop *)drop;
 - (NSString *)getUsername;
+- (void)shareFileWithUsers:(NSArray *)users;
+- (void)makeFilePublic;
 
 @end

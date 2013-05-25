@@ -73,18 +73,26 @@
 		else {
 			view.annotation = annotation;
 		}
-//        Drop *drop = view.annotation;
-//        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-//        [query includeKey:kParseUserKey];
-//        PFObject *object = [query getObjectWithId:drop.object.objectId];
-//        PFUser *user = [object objectForKey:kParseUserKey];
-//        [object fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-//            if ([[[PFUser currentUser] username] isEqualToString:[user username]]) {
-//                view.pinColor = MKPinAnnotationColorGreen;
-//            } else {
-//                view.pinColor = MKPinAnnotationColorRed;
-//            }
-//        }];
+        Drop *drop = view.annotation;
+        if([[drop username] isEqualToString:@""]) {
+            PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+            [query includeKey:kParseUserKey];
+            PFObject *object = [query getObjectWithId:drop.object.objectId];
+            PFUser *user = [object objectForKey:kParseUserKey];
+            [object fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if ([[[PFUser currentUser] username] isEqualToString:[user username]]) {
+                    view.pinColor = MKPinAnnotationColorGreen;
+                } else {
+                    view.pinColor = MKPinAnnotationColorRed;
+                }
+            }];
+        } else {
+            if ([[[PFUser currentUser] username] isEqualToString:[drop username]]) {
+                view.pinColor = MKPinAnnotationColorGreen;
+            } else {
+                view.pinColor = MKPinAnnotationColorRed;
+            }
+        }
 		view.animatesDrop = YES;
 		return view;
     }
@@ -129,13 +137,17 @@
 	}
 	[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
 		if (error) {
-			NSLog(@"%@", [error localizedDescription]); // todo why is this ever happening?
+			NSLog(@"%@", [error localizedDescription]);
 		} else {
 			NSMutableArray *newPosts = [[NSMutableArray alloc] initWithCapacity:100];
 			NSMutableArray *allNewPosts = [[NSMutableArray alloc] initWithCapacity:100];
 			for (PFObject *object in objects) {
 				Drop *drop = [[Drop alloc] initWithDrop:object];
-				[allNewPosts addObject:drop];
+                if ([drop canUserSeeDrop:drop]) {
+                    [allNewPosts addObject:drop];
+                } else {
+                    NSLog(@"Denied Access");   
+                }
 				BOOL found = NO;
 				for (Drop *currentDrop in _allPosts) {
 					if ([drop equalToDrop:currentDrop]) {
@@ -146,7 +158,6 @@
 					[newPosts addObject:drop];
 				}
 			}
-            
 			NSMutableArray *postsToRemove = [[NSMutableArray alloc] initWithCapacity:100];
 			for (Drop *currentPost in _allPosts) {
 				BOOL found = NO;
@@ -159,6 +170,7 @@
 					[postsToRemove addObject:currentPost];
 				}
 			}
+            NSLog(@"%@ %@", allNewPosts, newPosts);
 			[_mapView removeAnnotations:postsToRemove];
 			[_mapView addAnnotations:newPosts];
 			[_allPosts addObjectsFromArray:newPosts];
@@ -176,11 +188,8 @@
 	}
 	_locationManager.delegate = self;
 	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-	// Set a movement threshold for new events.
 	_locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-    
 	[_locationManager startUpdatingLocation];
-    
 	CLLocation *currentLocation = _locationManager.location;
 	if (currentLocation) {
 		AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -193,15 +202,13 @@
 	switch (status) {
 		case kCLAuthorizationStatusAuthorized:
 			NSLog(@"kCLAuthorizationStatusAuthorized");
-			// Re-enable the post button if it was disabled before.
 			[_locationManager startUpdatingLocation];
 			break;
 		case kCLAuthorizationStatusDenied:
 			NSLog(@"kCLAuthorizationStatusDenied");
         {{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"AnyWall can’t access your current location.\n\nTo view nearby posts or create a post at your current location, turn on access for AnyWall to your location in the Settings app under Location Services." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Drop can’t access your current location. Turn on access in the Settings app under Location Services." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
             [alertView show];
-            // Disable the post button.
         }}
 			break;
 		case kCLAuthorizationStatusNotDetermined:
@@ -213,33 +220,10 @@
 	}
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-    didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation {
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
 	NSLog(@"%s", __PRETTY_FUNCTION__);
-    
 	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 	appDelegate.currentLocation = newLocation;
-}
-
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
-	NSLog(@"Error: %@", [error description]);
-    
-	if (error.code == kCLErrorDenied) {
-		[_locationManager stopUpdatingLocation];
-	} else if (error.code == kCLErrorLocationUnknown) {
-		// todo: retry?
-		// set a timer for five seconds to cycle location, and if it fails again, bail and tell the user.
-	} else {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error retrieving location"
-		                                                message:[error description]
-		                                               delegate:nil
-		                                      cancelButtonTitle:nil
-		                                      otherButtonTitles:@"Ok", nil];
-		[alert show];
-	}
 }
 
 @end

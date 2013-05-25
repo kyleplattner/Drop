@@ -11,10 +11,6 @@
 
 @interface Drop ()
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-//@property (nonatomic, strong) PFObject *object;
-//@property (nonatomic, strong) PFGeoPoint *geopoint;
-//@property (nonatomic, strong) PFUser *user;
-//@property (nonatomic, strong) PFFile *file;
 @end
 
 @implementation Drop
@@ -27,8 +23,11 @@
         [self.geopoint setLatitude:coordinate.latitude];
         [self.geopoint setLongitude:coordinate.longitude];
         self.user = [PFUser currentUser];
-        self.user.username = [[PFUser currentUser] username];
+        self.username = [[PFUser currentUser] username];
         self.file = nil;
+        self.filename = nil;
+        self.url = nil;
+        self.sharedUsers = nil;
     }
     return self;
 }
@@ -45,6 +44,9 @@
         self.user = [object objectForKey:kParseUserKey];
         self.coordinate = location;
         self.file = [object objectForKey:kParseFileKey];
+        self.filename = [object objectForKey:kParseFilenameKey];
+        self.username = [object objectForKey:kParseUsernameKey];
+        self.sharedUsers = [object objectForKey:kParseSharedUserArrayKey];
     }
     return self;
 }
@@ -66,16 +68,51 @@
 	}
 }
 
+-(BOOL)canUserSeeDrop:(Drop *)drop {
+    if ([_sharedUsers containsObject:[drop getUsername]] || [_sharedUsers containsObject:@"public"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (void)setDropBoxFile:(PFFile *)file {
     self.file = file;
 }
 
 - (NSString *)getUsername {
+    if([_username isEqualToString:@""]) {
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        [query includeKey:kParseUserKey];
+        PFObject *object = [query getObjectWithId:self.object.objectId];
+        PFUser *user = [object objectForKey:kParseUserKey];
+        return user.username;
+    } else {
+        return _username;
+    }
+}
+
+-(void)shareFileWithUsers:(NSArray *)users {
+    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:self.sharedUsers];
+    [userArray addObjectsFromArray:users];
     PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-    [query includeKey:kParseUserKey];
+    [query includeKey:kParseSharedUserArrayKey];
     PFObject *object = [query getObjectWithId:self.object.objectId];
-    PFUser *testUser = [object objectForKey:kParseUserKey];
-    return testUser.username;
+    [object setObject:userArray forKey:kParseSharedUserArrayKey];
+    [object save];
+}
+
+-(void)makeFilePublic {
+    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:self.sharedUsers];
+    if (![userArray containsObject:@"public"]) {
+        NSArray *public = [[NSArray alloc] initWithObjects:@"public", nil];
+        [userArray addObjectsFromArray:public];
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        [query includeKey:kParseSharedUserArrayKey];
+        PFObject *object = [query getObjectWithId:self.object.objectId];
+        [object setObject:userArray forKey:kParseSharedUserArrayKey];
+        [object save];
+    }
 }
 
 @end

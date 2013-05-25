@@ -14,7 +14,8 @@
 @interface DroppedPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-- (IBAction)viewFileButtonPressed:(id)sender;
+-(IBAction)viewFileButtonPressed:(id)sender;
+-(void)shareFileWithUsers:(NSArray*)users;
 @end
 
 @implementation DroppedPinViewController
@@ -24,18 +25,20 @@
     if (self) {
         _mapView = mapView;
         _droppedPin = droppedPin;
-//        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-//        [query getObjectWithId:droppedPin.object.objectId];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    PFObject *object = [_droppedPin object];
-    [object fetchIfNeeded];
-    PFFile *file = [object objectForKey:kParseFileKey];
-    [_label setText:[file name]];
+    if ([[_droppedPin filename] isEqualToString:@""]) {
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        PFObject *object = [query getObjectWithId:_droppedPin.object.objectId];
+        [object fetchIfNeeded];
+        [_label setText:[object objectForKey:kParseFilenameKey]];
+    } else {
+        [_label setText:[_droppedPin filename]];
+    }
     [_usernameLabel setText:[NSString stringWithFormat:@"Posted by: %@", [_droppedPin getUsername]]];
 }
 
@@ -63,6 +66,10 @@
     [previewController setModalInPopover:YES];
     [previewController setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentViewController:previewController animated:YES completion:nil];
+}
+
+-(void)shareFileWithUsers:(NSArray *)users {
+
 }
 
 @end
