@@ -21,7 +21,6 @@
 - (id)initWithMapView:(MKMapView*)mapView viewController:(UIViewController*)view;
 - (void)startStandardUpdates;
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
 - (void)linkDropboxFileForDrop:(Drop*)drop;
 
 @end

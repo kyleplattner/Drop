@@ -30,6 +30,7 @@
         _view = view;
         _annotations = [[NSMutableArray alloc] initWithCapacity:100];
 		_allPosts = [[NSMutableArray alloc] initWithCapacity:100];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissPopover) name:@"DismissPopoverNotification" object:nil];
         [self startStandardUpdates];
         [self queryForAllPosts];
     }
@@ -109,7 +110,7 @@
     [_mapView deselectAnnotation:self.droppedPin animated:YES];
     _popoverController = nil;
 }
-
+         
 - (void)linkDropboxFileForDrop:(Drop*)drop {
     DropboxDelegate* dropBoxDelegate = [[DropboxDelegate alloc] init];
     dropBoxDelegate.view = self.view;

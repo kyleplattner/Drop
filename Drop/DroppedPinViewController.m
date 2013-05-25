@@ -15,7 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 -(IBAction)viewFileButtonPressed:(id)sender;
--(void)shareFileWithUsers:(NSArray*)users;
+-(IBAction)deleteDropButtonPressed:(id)sender;
+-(IBAction)shareFileButtonPressed:(id)sender;
+-(NSString *)fileExtension;
 @end
 
 @implementation DroppedPinViewController
@@ -68,8 +70,23 @@
     [self presentViewController:previewController animated:YES completion:nil];
 }
 
--(void)shareFileWithUsers:(NSArray *)users {
+- (IBAction)deleteDropButtonPressed:(id)sender {
+    [_mapView removeAnnotation:_droppedPin];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DismissPopoverNotification" object:nil];
+    [_droppedPin deleteDrop];
+}
 
+- (IBAction)shareFileButtonPressed:(id)sender {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Not Implemented Yet" message:@"Feature Under Construction" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+}
+
+-(NSString *)fileExtension {
+    if([[_droppedPin filename] length] > 3) {
+        return [[_droppedPin filename] substringFromIndex:[[_droppedPin filename] length] - 3];
+    } else {
+        return nil;
+    }
 }
 
 @end

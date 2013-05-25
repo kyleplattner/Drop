@@ -115,4 +115,15 @@
     }
 }
 
+-(void)deleteDrop {
+    PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+    PFObject *object = [query getObjectWithId:self.object.objectId];
+    [object delete];
+    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString* localPath = [documentsPath stringByAppendingPathComponent:self.filename];
+    if([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
+        [[NSFileManager defaultManager] removeItemAtPath:localPath error:nil];
+    }
+}
+
 @end

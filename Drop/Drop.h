@@ -30,5 +30,6 @@
 - (NSString *)getUsername;
 - (void)shareFileWithUsers:(NSArray *)users;
 - (void)makeFilePublic;
+- (void)deleteDrop;
 
 @end
