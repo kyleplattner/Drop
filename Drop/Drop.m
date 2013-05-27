@@ -93,12 +93,19 @@
 }
 
 -(void)shareFileWithUsers:(NSArray *)users {
-    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:self.sharedUsers];
-    [userArray addObjectsFromArray:users];
+//    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:self.sharedUsers];
+//    for (NSString *user in users) {
+//        if ([userArray containsObject:user]) {
+//            [userArray removeObject:user];
+//        }
+//    }
+//    [userArray addObjectsFromArray:users];
+    
+    //TODO: Can I just overwrite the shared users array every time? 
+    
     PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-    [query includeKey:kParseSharedUserArrayKey];
     PFObject *object = [query getObjectWithId:self.object.objectId];
-    [object setObject:userArray forKey:kParseSharedUserArrayKey];
+    [object setObject:users forKey:kParseSharedUserArrayKey];
     [object save];
 }
 

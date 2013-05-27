@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 static NSString * const kParsePostsClassKey = @"Drop";
+static NSString * const kParseUserClassKey = @"_User";
 static NSString * const kParseUserKey = @"user";
 static NSString * const kParseLocationKey = @"location";
 static NSString * const kParseFileKey = @"file";

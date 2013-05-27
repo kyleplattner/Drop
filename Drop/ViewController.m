@@ -11,6 +11,7 @@
 #import "SignUpViewController.h"
 #import <Parse/Parse.h>
 #import "Drop.h"
+#import "NPReachability.h"
 
 @interface ViewController ()
 - (IBAction)settingsButtonPressed:(id)sender;
@@ -31,9 +32,6 @@
     longPress.minimumPressDuration = 2.0;
     [self.mapView addGestureRecognizer:longPress];
     [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
-    if (![[DBSession sharedSession] isLinked]) {
-        [[DBSession sharedSession] linkFromController:self];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,8 +46,10 @@
 - (void)logInUser {
     PFUser *currentUser = [PFUser currentUser];
 	if (currentUser) {
-        NSLog(@"%@", currentUser);
-	} else {
+        if (![[DBSession sharedSession] isLinked]) {
+            [[DBSession sharedSession] linkFromController:self];
+        }
+    } else {
         LogInViewController *loginViewController = [[LogInViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         loginViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton | PFLogInFieldsSignUpButton;
         loginViewController.delegate = self;
@@ -70,15 +70,23 @@
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
         return;
-    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
-    CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
-    Drop *drop = [[Drop alloc] initWithCoordinate:touchMapCoordinate];
-    [self.mapView addAnnotation:drop];
-    [_mapViewDelegate linkDropboxFileForDrop:drop];
+    if (![[NPReachability sharedInstance] isCurrentlyReachable]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Drop requires an internet connection to drop and share files. Please connect to the internet." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alertView show];
+    } else {
+        CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+        CLLocationCoordinate2D touchMapCoordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+        Drop *drop = [[Drop alloc] initWithCoordinate:touchMapCoordinate];
+        [self.mapView addAnnotation:drop];
+        [_mapViewDelegate linkDropboxFileForDrop:drop];
+    }
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self dismissViewControllerAnimated:YES completion:NULL];
+    if (![[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] linkFromController:self];
+    }
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
@@ -90,7 +98,7 @@
         return YES;
     }
     
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out your username, password, and email address", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     return NO;
 }
 
@@ -105,7 +113,7 @@
     }
     
     if (!informationComplete) {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the information!", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the fields", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     }
     
     return informationComplete;

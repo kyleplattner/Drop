@@ -89,6 +89,11 @@
 		EBCE274F1736ED7900A63696 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE274E1736ED7900A63696 /* CFNetwork.framework */; };
 		EBCE27511736ED8600A63696 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27501736ED8600A63696 /* MobileCoreServices.framework */; };
 		EBCE27531736ED9000A63696 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE27521736ED9000A63696 /* SystemConfiguration.framework */; };
+		EBE813CD17529F0D001AC56D /* UserBubbleColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE813C517529F0D001AC56D /* UserBubbleColor.m */; };
+		EBE813CE17529F0D001AC56D /* UserBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE813C717529F0D001AC56D /* UserBubble.m */; };
+		EBE813CF17529F0D001AC56D /* UserPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE813C917529F0D001AC56D /* UserPickerView.m */; };
+		EBE813D017529F0D001AC56D /* UserPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE813CB17529F0D001AC56D /* UserPickerViewController.m */; };
+		EBE813D117529F0D001AC56D /* UserPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE813CC17529F0D001AC56D /* UserPickerViewController.xib */; };
 		EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF331FD1730797B006D690E /* QuartzCore.framework */; };
 		EBF3320A1731C32B006D690E /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332091731C32B006D690E /* MapViewDelegate.m */; };
 		EBF3320E1731C4C1006D690E /* DroppedPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */; };
@@ -249,6 +254,15 @@
 		EBCE274E1736ED7900A63696 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		EBCE27501736ED8600A63696 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EBCE27521736ED9000A63696 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EBE813C417529F0D001AC56D /* UserBubbleColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBubbleColor.h; sourceTree = "<group>"; };
+		EBE813C517529F0D001AC56D /* UserBubbleColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBubbleColor.m; sourceTree = "<group>"; };
+		EBE813C617529F0D001AC56D /* UserBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBubble.h; sourceTree = "<group>"; };
+		EBE813C717529F0D001AC56D /* UserBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBubble.m; sourceTree = "<group>"; };
+		EBE813C817529F0D001AC56D /* UserPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPickerView.h; sourceTree = "<group>"; };
+		EBE813C917529F0D001AC56D /* UserPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPickerView.m; sourceTree = "<group>"; };
+		EBE813CA17529F0D001AC56D /* UserPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPickerViewController.h; sourceTree = "<group>"; };
+		EBE813CB17529F0D001AC56D /* UserPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPickerViewController.m; sourceTree = "<group>"; };
+		EBE813CC17529F0D001AC56D /* UserPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserPickerViewController.xib; sourceTree = "<group>"; };
 		EBF331FD1730797B006D690E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EBF332081731C32B006D690E /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
 		EBF332091731C32B006D690E /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
@@ -496,32 +510,16 @@
 		EB4DD132172DE5CF001D3070 /* Drop */ = {
 			isa = PBXGroup;
 			children = (
+				EBE813C317529EDC001AC56D /* File Sharing */,
 				EB1560DC17427D4F00468E6B /* Core Data */,
 				EBF3321417333DE3006D690E /* Images */,
 				EB4DD13B172DE5CF001D3070 /* AppDelegate.h */,
 				EB4DD13C172DE5CF001D3070 /* AppDelegate.m */,
-				EB4DD144172DE5CF001D3070 /* MainStoryboard.storyboard */,
-				EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */,
-				EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */,
-				EB4DD147172DE5CF001D3070 /* ViewController.h */,
-				EB4DD148172DE5CF001D3070 /* ViewController.m */,
-				EB0251D2174450C20036527B /* Drop.h */,
-				EB0251D3174450C20036527B /* Drop.m */,
-				EBF332081731C32B006D690E /* MapViewDelegate.h */,
-				EBF332091731C32B006D690E /* MapViewDelegate.m */,
-				EBF3320B1731C4C1006D690E /* DroppedPinViewController.h */,
-				EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */,
-				EBF3320D1731C4C1006D690E /* DroppedPinViewController.xib */,
-				EBF33364173566B6006D690E /* SettingsViewController.h */,
-				EBF33365173566B6006D690E /* SettingsViewController.m */,
-				EB1560AD173DA69B00468E6B /* LogInViewController.h */,
-				EB1560AE173DA69B00468E6B /* LogInViewController.m */,
-				EB1560AF173DA69B00468E6B /* SignUpViewController.h */,
-				EB1560B0173DA69B00468E6B /* SignUpViewController.m */,
-				EB1560D917402F6D00468E6B /* DropboxDelegate.h */,
-				EB1560DA17402F6D00468E6B /* DropboxDelegate.m */,
-				EBFFF6251748674900BCDB33 /* PreviewController.h */,
-				EBFFF6261748674A00BCDB33 /* PreviewController.m */,
+				EBE813C117529EA5001AC56D /* Main View Controllers */,
+				EBE813C217529ECE001AC56D /* Drop Model */,
+				EBE813BF17529E6A001AC56D /* Delegates */,
+				EBE813BE17529E4E001AC56D /* Startup Process */,
+				EBE813C017529E8A001AC56D /* File Preview */,
 				EBF33363173564FB006D690E /* Dropbox */,
 				EB4DD133172DE5CF001D3070 /* Supporting Files */,
 			);
@@ -574,6 +572,77 @@
 				EBCE27421735A6F600A63696 /* TestFlight.h */,
 			);
 			path = TestFlightSDK1.2.4;
+			sourceTree = "<group>";
+		};
+		EBE813BE17529E4E001AC56D /* Startup Process */ = {
+			isa = PBXGroup;
+			children = (
+				EB1560AD173DA69B00468E6B /* LogInViewController.h */,
+				EB1560AE173DA69B00468E6B /* LogInViewController.m */,
+				EB1560AF173DA69B00468E6B /* SignUpViewController.h */,
+				EB1560B0173DA69B00468E6B /* SignUpViewController.m */,
+			);
+			name = "Startup Process";
+			sourceTree = "<group>";
+		};
+		EBE813BF17529E6A001AC56D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				EBF332081731C32B006D690E /* MapViewDelegate.h */,
+				EBF332091731C32B006D690E /* MapViewDelegate.m */,
+				EB1560D917402F6D00468E6B /* DropboxDelegate.h */,
+				EB1560DA17402F6D00468E6B /* DropboxDelegate.m */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		EBE813C017529E8A001AC56D /* File Preview */ = {
+			isa = PBXGroup;
+			children = (
+				EBFFF6251748674900BCDB33 /* PreviewController.h */,
+				EBFFF6261748674A00BCDB33 /* PreviewController.m */,
+			);
+			name = "File Preview";
+			sourceTree = "<group>";
+		};
+		EBE813C117529EA5001AC56D /* Main View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB4DD144172DE5CF001D3070 /* MainStoryboard.storyboard */,
+				EB4DD147172DE5CF001D3070 /* ViewController.h */,
+				EB4DD148172DE5CF001D3070 /* ViewController.m */,
+				EBF3320B1731C4C1006D690E /* DroppedPinViewController.h */,
+				EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */,
+				EBF3320D1731C4C1006D690E /* DroppedPinViewController.xib */,
+				EBF33364173566B6006D690E /* SettingsViewController.h */,
+				EBF33365173566B6006D690E /* SettingsViewController.m */,
+			);
+			name = "Main View Controllers";
+			sourceTree = "<group>";
+		};
+		EBE813C217529ECE001AC56D /* Drop Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB0251D2174450C20036527B /* Drop.h */,
+				EB0251D3174450C20036527B /* Drop.m */,
+			);
+			name = "Drop Model";
+			sourceTree = "<group>";
+		};
+		EBE813C317529EDC001AC56D /* File Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				EBE813C417529F0D001AC56D /* UserBubbleColor.h */,
+				EBE813C517529F0D001AC56D /* UserBubbleColor.m */,
+				EBE813C617529F0D001AC56D /* UserBubble.h */,
+				EBE813C717529F0D001AC56D /* UserBubble.m */,
+				EBE813C817529F0D001AC56D /* UserPickerView.h */,
+				EBE813C917529F0D001AC56D /* UserPickerView.m */,
+				EBE813CA17529F0D001AC56D /* UserPickerViewController.h */,
+				EBE813CB17529F0D001AC56D /* UserPickerViewController.m */,
+				EBE813CC17529F0D001AC56D /* UserPickerViewController.xib */,
+			);
+			name = "File Sharing";
 			sourceTree = "<group>";
 		};
 		EBF3321417333DE3006D690E /* Images */ = {
@@ -635,6 +704,8 @@
 				EBF33351173564F3006D690E /* KioskDropboxPDFDataController.m */,
 				EBF33352173564F3006D690E /* KioskDropboxPDFRootViewController.h */,
 				EBF33353173564F3006D690E /* KioskDropboxPDFRootViewController.m */,
+				EBF3336717356BD1006D690E /* MainStoryboard_iPad.storyboard */,
+				EBF3336817356BD1006D690E /* MainStoryboard_iPhone.storyboard */,
 				EBF33354173564F4006D690E /* Utilities */,
 			);
 			name = Dropbox;
@@ -733,6 +804,7 @@
 				EB1560D5173ECB5D00468E6B /* registerFieldsBkg.png in Resources */,
 				EB1560D6173ECB5D00468E6B /* registerFieldsBkg@2x.png in Resources */,
 				EB1560D8173ED16100468E6B /* Localizable.strings in Resources */,
+				EBE813D117529F0D001AC56D /* UserPickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +865,10 @@
 				EB1561481742C5AC00468E6B /* Model.xcdatamodeld in Sources */,
 				EB0251D4174450C20036527B /* Drop.m in Sources */,
 				EBFFF6271748674A00BCDB33 /* PreviewController.m in Sources */,
+				EBE813CD17529F0D001AC56D /* UserBubbleColor.m in Sources */,
+				EBE813CE17529F0D001AC56D /* UserBubble.m in Sources */,
+				EBE813CF17529F0D001AC56D /* UserPickerView.m in Sources */,
+				EBE813D017529F0D001AC56D /* UserPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

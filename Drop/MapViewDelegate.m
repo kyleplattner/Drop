@@ -171,7 +171,6 @@
 					[postsToRemove addObject:currentPost];
 				}
 			}
-            NSLog(@"%@ %@", allNewPosts, newPosts);
 			[_mapView removeAnnotations:postsToRemove];
 			[_mapView addAnnotations:newPosts];
 			[_allPosts addObjectsFromArray:newPosts];
@@ -208,7 +207,7 @@
 		case kCLAuthorizationStatusDenied:
 			NSLog(@"kCLAuthorizationStatusDenied");
         {{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Drop can’t access your current location. Turn on access in the Settings app under Location Services." message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Cannot Access Location" message:@"Drop can’t access your current location. Turn on access in the Settings app under Location Services." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
             [alertView show];
         }}
 			break;

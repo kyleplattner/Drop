@@ -10,6 +10,8 @@
 #import "Drop.h"
 #import "AppDelegate.h"
 #import "PreviewController.h"
+#import "UserPickerViewController.h"
+#import "NPReachability.h"
 
 @interface DroppedPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
@@ -27,6 +29,8 @@
     if (self) {
         _mapView = mapView;
         _droppedPin = droppedPin;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissPopover) name:@"CloseUserSharingPopoverNotification" object:nil];
+
     }
     return self;
 }
@@ -42,6 +46,10 @@
         [_label setText:[_droppedPin filename]];
     }
     [_usernameLabel setText:[NSString stringWithFormat:@"Posted by: %@", [_droppedPin getUsername]]];
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,8 +85,43 @@
 }
 
 - (IBAction)shareFileButtonPressed:(id)sender {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Not Implemented Yet" message:@"Feature Under Construction" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    if (![[NPReachability sharedInstance] isCurrentlyReachable]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"In order to share a file an internet connection is necessary." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    } else {
+        PFQuery *query = [PFQuery queryWithClassName:kParseUserClassKey];
+        
+        //TODO: can I run a fetch in the background and still have an array to populalate the UITableView with?
+        
+//        NSArray *objects = [query findObjects];
+        
+        NSMutableArray *users = [[NSMutableArray alloc] init];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            for (PFObject *object in objects) {
+                [users addObject:[object objectForKey:kParseUsernameKey]];
+            }
+        }];
+        UserPickerViewController *userPicker = [[UserPickerViewController alloc] initWithNibName:@"UserPickerViewController" bundle:nil andUsers:users forDrop:_droppedPin];
+        
+        //bug when opening for the second time 
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:userPicker];
+        if (self.userSelectorPopoverController == nil) {
+            
+            [navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.531 green:0.707 blue:0.404 alpha:1.000]];
+
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:navigationController];
+            
+            
+            popover.delegate = self;
+            self.userSelectorPopoverController = popover;
+        } else {
+            [_userSelectorPopoverController setContentViewController:userPicker animated:YES];
+        }
+        [_userSelectorPopoverController setPopoverContentSize:CGSizeMake(320, 250)];
+        UIButton *button = sender;
+        [_userSelectorPopoverController presentPopoverFromRect:button.frame inView:_mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 -(NSString *)fileExtension {
@@ -87,6 +130,14 @@
     } else {
         return nil;
     }
+}
+
+-(UIImage *)fileThumbnail {
+    return [UIImage imageNamed:[NSString stringWithFormat:@"%@", [self fileExtension]]];
+}
+
+-(void)dismissPopover {
+    [_userSelectorPopoverController dismissPopoverAnimated:YES];
 }
 
 @end

@@ -132,30 +132,6 @@
     <resources>
         <image name="settingsIcon.png" width="50" height="50"/>
     </resources>
-    <classes>
-        <class className="BButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BButton.h"/>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="logOutButtonPressed:"/>
-                <relationship kind="action" name="setupButtonPressed:"/>
-                <relationship kind="action" name="unlinkDropboxButtonPressed:"/>
-                <relationship kind="outlet" name="dropBoxButton" candidateClass="BButton"/>
-            </relationships>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="settingsButtonPressed:"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

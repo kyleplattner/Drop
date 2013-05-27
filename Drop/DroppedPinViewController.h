@@ -10,10 +10,11 @@
 #import <MapKit/MapKit.h>
 #import "Drop.h"
 
-@interface DroppedPinViewController : UIViewController
+@interface DroppedPinViewController : UIViewController <UIPopoverControllerDelegate>
 
 @property (nonatomic, retain) MKMapView* mapView;
-@property (nonatomic,retain) Drop *droppedPin;
+@property (nonatomic, retain) Drop *droppedPin;
+@property (nonatomic, retain) UIPopoverController* userSelectorPopoverController;
 
 -(id)initWithNibName:(NSString *)nibName mapView:(MKMapView *)mapView annotation:(Drop*)droppedPin;
 

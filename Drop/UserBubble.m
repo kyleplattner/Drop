@@ -1,0 +1,170 @@
+//
+//  UserBubble.m
+//  UserPicker
+//
+//  Created by Kyle Plattner on 5/27/13.
+//  Copyright (c) 2013 Kyle Plattner. All rights reserved.
+//
+
+#import "UserBubble.h"
+
+@implementation UserBubble
+
+#define kHorizontalPadding 10
+#define kVerticalPadding 2
+
+#define kColorGradientTop [UIColor colorWithRed:219.0/255.0 green:229.0/255.0 blue:249.0/255.0 alpha:1.0]
+#define kColorGradientBottom [UIColor colorWithRed:188.0/255.0 green:205.0/255.0 blue:242.0/255.0 alpha:1.0]
+#define kColorBorder [UIColor colorWithRed:127.0/255.0 green:127.0/255.0 blue:218.0/255.0 alpha:1.0]
+
+#define kColorSelectedGradientTop [UIColor colorWithRed:79.0/255.0 green:132.0/255.0 blue:255.0/255.0 alpha:1.0]
+#define kColorSelectedGradientBottom [UIColor colorWithRed:73.0/255.0 green:58.0/255.0 blue:242.0/255.0 alpha:1.0]
+#define kColorSelectedBorder [UIColor colorWithRed:56.0/255.0 green:0/255.0 blue:233.0/255.0 alpha:1.0]
+
+- (id)initWithName:(NSString *)name {
+    if ([self initWithName:name color:nil selectedColor:nil]) {
+
+    }
+    return self;
+}
+
+- (id)initWithName:(NSString *)name
+             color:(UserBubbleColor *)color
+     selectedColor:(UserBubbleColor *)selectedColor {
+    self = [super init];
+    if (self){
+        self.name = name;
+        self.isSelected = NO;
+
+        if (! color)
+            color = [[UserBubbleColor alloc] initWithGradientTop:kColorGradientTop
+                                                gradientBottom:kColorGradientBottom
+                                                        border:kColorBorder];
+
+        if (! selectedColor)
+            selectedColor = [[UserBubbleColor alloc] initWithGradientTop:kColorSelectedGradientTop
+                                                        gradientBottom:kColorSelectedGradientBottom
+                                                                border:kColorSelectedBorder];
+        
+        self.color = color;
+        self.selectedColor = selectedColor;
+        [self setupView];
+    }
+    return self;
+}
+
+- (void)setupView {
+    // Create Label
+    self.label = [[UILabel alloc] init];
+    self.label.backgroundColor = [UIColor clearColor];
+    self.label.text = self.name;
+    [self addSubview:self.label];
+    
+    self.textView = [[UITextView alloc] init];
+    self.textView.delegate = self;
+    self.textView.hidden = YES;
+    [self addSubview:self.textView];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.numberOfTouchesRequired = 1;
+    [self addGestureRecognizer:tapGesture];
+    [self adjustSize];
+    [self unSelect];
+}
+
+- (void)adjustSize {
+    [self.label sizeToFit];
+    CGRect frame = self.label.frame;
+    frame.origin.x = kHorizontalPadding;
+    frame.origin.y = kVerticalPadding;
+    self.label.frame = frame;
+    
+    self.bounds = CGRectMake(0, 0, frame.size.width + 2 * kHorizontalPadding, frame.size.height + 2 * kVerticalPadding);
+    
+    if (self.gradientLayer == nil){
+        self.gradientLayer = [CAGradientLayer layer];
+        [self.layer insertSublayer:self.gradientLayer atIndex:0];
+    }
+    self.gradientLayer.frame = self.bounds;
+
+    CALayer *viewLayer = [self layer];
+    viewLayer.cornerRadius = self.bounds.size.height / 2;
+    viewLayer.borderWidth = 1;
+    viewLayer.masksToBounds = YES;
+}
+
+- (void)setFont:(UIFont *)font {
+    self.label.font = font;
+
+    [self adjustSize];
+}
+
+- (void)select {
+    if ([self.delegate respondsToSelector:@selector(userBubbleWasSelected:)]){
+        [self.delegate userBubbleWasSelected:self];
+    }
+
+    CALayer *viewLayer = [self layer];
+    viewLayer.borderColor = self.selectedColor.border.CGColor;
+    
+    self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self.selectedColor.gradientTop CGColor], (id)[self.selectedColor.gradientBottom CGColor], nil];
+
+    self.label.textColor = [UIColor whiteColor];
+    
+    self.isSelected = YES;
+    
+    [self.textView becomeFirstResponder];
+}
+
+- (void)unSelect {
+    CALayer *viewLayer = [self layer];
+    viewLayer.borderColor = self.color.border.CGColor;
+    
+    self.gradientLayer.colors = [NSArray arrayWithObjects:(id)[self.color.gradientTop CGColor], (id)[self.color.gradientBottom CGColor], nil];
+    
+    self.label.textColor = [UIColor blackColor];
+
+    [self setNeedsDisplay];
+    self.isSelected = NO;
+    
+    [self.textView resignFirstResponder];
+}
+
+- (void)handleTapGesture {
+    if (self.isSelected){
+        [self unSelect];
+    } else {
+        [self select];
+    }
+}
+
+#pragma mark - UITextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
+{
+    self.textView.hidden = NO;
+    
+    if ( [text isEqualToString:@"\n"] ) { // Return key was pressed
+        return NO;
+    }
+    
+    // Capture "delete" key press when cell is empty
+    if ([textView.text isEqualToString:@""] && [text isEqualToString:@""]){
+        if ([self.delegate respondsToSelector:@selector(userBubbleShouldBeRemoved:)]){
+            [self.delegate userBubbleShouldBeRemoved:self];
+        }
+    }
+    
+    if (self.isSelected){
+        self.textView.text = @"";
+        [self unSelect];
+        if ([self.delegate respondsToSelector:@selector(userBubbleWasUnSelected:)]){
+            [self.delegate userBubbleWasUnSelected:self];
+        }
+    }
+    
+    return YES;
+}
+
+@end
