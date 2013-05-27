@@ -12,6 +12,7 @@
 #import "PreviewController.h"
 #import "UserPickerViewController.h"
 #import "NPReachability.h"
+#import "GIKPopoverBackgroundView.h"
 
 @interface DroppedPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
@@ -103,21 +104,16 @@
         }];
         UserPickerViewController *userPicker = [[UserPickerViewController alloc] initWithNibName:@"UserPickerViewController" bundle:nil andUsers:users forDrop:_droppedPin];
         
-        //bug when opening for the second time 
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:userPicker];
         if (self.userSelectorPopoverController == nil) {
-            
-            [navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.531 green:0.707 blue:0.404 alpha:1.000]];
-
             UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:navigationController];
-            
-            
             popover.delegate = self;
             self.userSelectorPopoverController = popover;
         } else {
-            [_userSelectorPopoverController setContentViewController:userPicker animated:YES];
+            [_userSelectorPopoverController setContentViewController:navigationController animated:YES];
         }
+        [_userSelectorPopoverController setPopoverBackgroundViewClass:[GIKPopoverBackgroundView class]];
         [_userSelectorPopoverController setPopoverContentSize:CGSizeMake(320, 250)];
         UIButton *button = sender;
         [_userSelectorPopoverController presentPopoverFromRect:button.frame inView:_mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
