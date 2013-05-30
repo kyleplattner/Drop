@@ -86,6 +86,9 @@
 }
 
 - (IBAction)shareFileButtonPressed:(id)sender {
+    
+    //TODO: Check to see if the current user owns the drop
+    
     if (![[NPReachability sharedInstance] isCurrentlyReachable]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"In order to share a file an internet connection is necessary." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -94,14 +97,12 @@
         
         //TODO: can I run a fetch in the background and still have an array to populalate the UITableView with?
         
-//        NSArray *objects = [query findObjects];
+        NSArray *objects = [query findObjects];
         
         NSMutableArray *users = [[NSMutableArray alloc] init];
-        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            for (PFObject *object in objects) {
-                [users addObject:[object objectForKey:kParseUsernameKey]];
-            }
-        }];
+        for (PFObject *object in objects) {
+            [users addObject:[object objectForKey:kParseUsernameKey]];
+        }
         UserPickerViewController *userPicker = [[UserPickerViewController alloc] initWithNibName:@"UserPickerViewController" bundle:nil andUsers:users forDrop:_droppedPin];
         
         

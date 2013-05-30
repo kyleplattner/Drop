@@ -13,6 +13,7 @@
 #import "Drop.h"
 #import <Parse/Parse.h>
 #import "AppDelegate.h"
+#import "GIKPopoverBackgroundView.h"
 
 @interface MapViewDelegate ()
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -54,6 +55,7 @@
         [_popoverController setContentViewController:droppedPinView animated:YES];
     }
     [_popoverController setPopoverContentSize:CGSizeMake(430, 400)];
+    [_popoverController setPopoverBackgroundViewClass:[GIKPopoverBackgroundView class]];
     CGPoint annotationPoint = [self.mapView convertCoordinate:view.annotation.coordinate toPointToView:self.mapView];
     CGRect box = CGRectMake(annotationPoint.x, annotationPoint.y, 5, 5);
     [_popoverController presentPopoverFromRect:box inView:_mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];

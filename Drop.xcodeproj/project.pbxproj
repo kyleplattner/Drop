@@ -109,6 +109,7 @@
 		EBE813EF1754001E001AC56D /* PopoverBackgroundArrowUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBE813E11754001E001AC56D /* PopoverBackgroundArrowUp@2x.png */; };
 		EBE813F01754001E001AC56D /* PopoverBackgroundArrowUpRight.png in Resources */ = {isa = PBXBuildFile; fileRef = EBE813E21754001E001AC56D /* PopoverBackgroundArrowUpRight.png */; };
 		EBE813F11754001E001AC56D /* PopoverBackgroundArrowUpRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBE813E31754001E001AC56D /* PopoverBackgroundArrowUpRight@2x.png */; };
+		EBE813F51754DC62001AC56D /* FrameAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE813F41754DC62001AC56D /* FrameAccessor.m */; };
 		EBF331FE1730797B006D690E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBF331FD1730797B006D690E /* QuartzCore.framework */; };
 		EBF3320A1731C32B006D690E /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF332091731C32B006D690E /* MapViewDelegate.m */; };
 		EBF3320E1731C4C1006D690E /* DroppedPinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF3320C1731C4C1006D690E /* DroppedPinViewController.m */; };
@@ -294,6 +295,8 @@
 		EBE813E11754001E001AC56D /* PopoverBackgroundArrowUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopoverBackgroundArrowUp@2x.png"; sourceTree = "<group>"; };
 		EBE813E21754001E001AC56D /* PopoverBackgroundArrowUpRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PopoverBackgroundArrowUpRight.png; sourceTree = "<group>"; };
 		EBE813E31754001E001AC56D /* PopoverBackgroundArrowUpRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PopoverBackgroundArrowUpRight@2x.png"; sourceTree = "<group>"; };
+		EBE813F31754DC62001AC56D /* FrameAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameAccessor.h; sourceTree = "<group>"; };
+		EBE813F41754DC62001AC56D /* FrameAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameAccessor.m; sourceTree = "<group>"; };
 		EBF331FD1730797B006D690E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		EBF332081731C32B006D690E /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
 		EBF332091731C32B006D690E /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
@@ -749,6 +752,8 @@
 		EBF33354173564F4006D690E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EBE813F31754DC62001AC56D /* FrameAccessor.h */,
+				EBE813F41754DC62001AC56D /* FrameAccessor.m */,
 				EBCE27311735A42C00A63696 /* BButton */,
 				EBF33355173564F4006D690E /* MBProgressHUD.h */,
 				EBF33356173564F4006D690E /* MBProgressHUD.m */,
@@ -947,6 +952,7 @@
 				EBE813CE17529F0D001AC56D /* UserBubble.m in Sources */,
 				EBE813CF17529F0D001AC56D /* UserPickerView.m in Sources */,
 				EBE813D017529F0D001AC56D /* UserPickerViewController.m in Sources */,
+				EBE813F51754DC62001AC56D /* FrameAccessor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
