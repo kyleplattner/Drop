@@ -12,8 +12,10 @@
 #import <Parse/Parse.h>
 #import "Drop.h"
 #import "NPReachability.h"
+#import "SettingsViewController.h"
 
 @interface ViewController ()
+@property (nonatomic, retain) SettingsViewController *settingsViewController;
 - (IBAction)settingsButtonPressed:(id)sender;
 - (void)logInUser;
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
@@ -40,7 +42,10 @@
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {
+    _settingsViewController = [[SettingsViewController alloc] init];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TransferDelegateNotification" object:self];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Log Out" message:nil delegate:_settingsViewController cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out of Drop", @"Log out of Dropbox", nil];
+    [alertView show];
 }
 
 - (void)logInUser {

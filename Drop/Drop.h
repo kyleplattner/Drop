@@ -27,9 +27,11 @@
 - (void)setDropBoxFile:(PFFile *)file;
 - (BOOL)equalToDrop:(Drop *)drop;
 - (BOOL)canUserSeeDrop:(Drop *)drop;
+- (BOOL)isFilePublic;
 - (NSString *)getUsername;
 - (void)shareFileWithUsers:(NSArray *)users;
 - (void)makeFilePublic;
+- (void)makeFilePrivate;
 - (void)deleteDrop;
 
 @end

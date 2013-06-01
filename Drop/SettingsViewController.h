@@ -12,6 +12,6 @@
 #import <AssetsLibrary/ALAsset.h>
 #import "ViewController.h"
 
-@interface SettingsViewController : UIViewController <KioskDropboxPDFBrowserViewControllerUIDelegate, DBRestClientDelegate, UINavigationControllerDelegate>
+@interface SettingsViewController : UIViewController <KioskDropboxPDFBrowserViewControllerUIDelegate, DBRestClientDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @end

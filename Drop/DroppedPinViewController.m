@@ -13,10 +13,16 @@
 #import "UserPickerViewController.h"
 #import "NPReachability.h"
 #import "GIKPopoverBackgroundView.h"
+#import "BButton.h"
 
 @interface DroppedPinViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet BButton *deleteButton;
+@property (weak, nonatomic) IBOutlet BButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
+@property (weak, nonatomic) IBOutlet UISwitch *publicSwitch;
+-(IBAction)publicSwitch:(id)sender;
 -(IBAction)viewFileButtonPressed:(id)sender;
 -(IBAction)deleteDropButtonPressed:(id)sender;
 -(IBAction)shareFileButtonPressed:(id)sender;
@@ -42,11 +48,18 @@
         PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
         PFObject *object = [query getObjectWithId:_droppedPin.object.objectId];
         [object fetchIfNeeded];
+        [_droppedPin setFilename:[object objectForKey:kParseFilenameKey]];
         [_label setText:[object objectForKey:kParseFilenameKey]];
     } else {
         [_label setText:[_droppedPin filename]];
     }
     [_usernameLabel setText:[NSString stringWithFormat:@"Posted by: %@", [_droppedPin getUsername]]];
+    [_shareButton setHidden:![self shouldAllowDeleteAndShare]];
+    [_deleteButton setHidden:![self shouldAllowDeleteAndShare]];
+    [_publicSwitch setHidden:![self shouldAllowDeleteAndShare]];
+    [_thumbnail setImage:[self fileThumbnail]];
+    [_publicSwitch setOn:[_droppedPin isFilePublic]];
+    [_shareButton setEnabled:![_droppedPin isFilePublic]];
 }
 
 -(void)dealloc {
@@ -86,9 +99,6 @@
 }
 
 - (IBAction)shareFileButtonPressed:(id)sender {
-    
-    //TODO: Check to see if the current user owns the drop
-    
     if (![[NPReachability sharedInstance] isCurrentlyReachable]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"In order to share a file an internet connection is necessary." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -101,10 +111,11 @@
         
         NSMutableArray *users = [[NSMutableArray alloc] init];
         for (PFObject *object in objects) {
-            [users addObject:[object objectForKey:kParseUsernameKey]];
+            if([[object objectForKey:kParseUsernameKey] isEqualToString:[[PFUser currentUser] username]] || [[object objectForKey:kParseUsernameKey] isEqualToString:@"public"]) {
+                [users addObject:[object objectForKey:kParseUsernameKey]];
+            }
         }
         UserPickerViewController *userPicker = [[UserPickerViewController alloc] initWithNibName:@"UserPickerViewController" bundle:nil andUsers:users forDrop:_droppedPin];
-        
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:userPicker];
         if (self.userSelectorPopoverController == nil) {
@@ -130,11 +141,34 @@
 }
 
 -(UIImage *)fileThumbnail {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"%@", [self fileExtension]]];
+    UIImage *thumbnail = [UIImage imageNamed:[NSString stringWithFormat:@"%@", [self fileExtension]]];
+    if (thumbnail) {
+        return thumbnail;
+    } else {
+        return [UIImage imageNamed:[NSString stringWithFormat:@"blank"]];
+    }
+}
+
+-(BOOL)shouldAllowDeleteAndShare {
+    if ([[_droppedPin getUsername] isEqualToString:[[PFUser currentUser] username]]) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 -(void)dismissPopover {
     [_userSelectorPopoverController dismissPopoverAnimated:YES];
+}
+
+- (IBAction)publicSwitch:(id)sender {
+    if ([_publicSwitch isOn]) {
+        [_droppedPin makeFilePublic];
+        [_shareButton setEnabled:NO];
+    } else {
+        [_droppedPin makeFilePrivate];
+        [_shareButton setEnabled:YES];
+    }
 }
 
 @end

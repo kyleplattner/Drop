@@ -31,8 +31,8 @@
     [super viewDidLoad];
     UIBarButtonItem * barButtonLeft = [[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStylePlain target:self action:@selector(removeAllusers:)];
     UIBarButtonItem * barButtonRight = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(dispatchDismiss)];
-    [barButtonLeft setTintColor:[UIColor colorWithRed:0.734 green:0.718 blue:0.690 alpha:1.000]];
-    [barButtonRight setTintColor:[UIColor colorWithRed:0.734 green:0.718 blue:0.690 alpha:1.000]];
+    [barButtonLeft setTintColor:[UIColor colorWithRed:0.421 green:0.610 blue:0.293 alpha:1.000]];
+    [barButtonRight setTintColor:[UIColor colorWithRed:0.421 green:0.610 blue:0.293 alpha:1.000]];
     self.navigationItem.leftBarButtonItem = barButtonLeft;
     self.navigationItem.rightBarButtonItem = barButtonRight;
     self.userPickerView = [[UserPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];

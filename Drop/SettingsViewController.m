@@ -120,4 +120,13 @@
     NSLog(@"Final Filename: %@", [KioskDropboxPDFRootViewController fileName]);
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //TODO: Clean up code
+    if(buttonIndex == 1) {
+        [self logOutButtonPressed:nil];
+    } else if (buttonIndex == 2) {
+        [self unlinkDropboxButtonPressed:nil];
+    }
+}
+
 @end

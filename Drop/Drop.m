@@ -86,23 +86,30 @@
         [query includeKey:kParseUserKey];
         PFObject *object = [query getObjectWithId:self.object.objectId];
         PFUser *user = [object objectForKey:kParseUserKey];
+        _username = user.username;
         return user.username;
     } else {
         return _username;
     }
 }
 
+- (NSArray *)getSharedUsers {
+    if ([self.sharedUsers count] > 0) {
+        return self.sharedUsers;
+    } else {
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        PFObject *object = [query getObjectWithId:self.object.objectId];
+        self.sharedUsers = [object objectForKey:kParseSharedUserArrayKey];
+        return [object objectForKey:kParseSharedUserArrayKey];
+    }
+}
+
 -(void)shareFileWithUsers:(NSArray *)users {
-//    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:self.sharedUsers];
-//    for (NSString *user in users) {
-//        if ([userArray containsObject:user]) {
-//            [userArray removeObject:user];
-//        }
-//    }
-//    [userArray addObjectsFromArray:users];
-    
-    //TODO: Can I just overwrite the shared users array every time? 
-    
+    if(![users containsObject:[[PFUser currentUser] username]]) {
+        NSMutableArray *array = [[NSMutableArray alloc] initWithArray:users];
+        [array addObject:[[PFUser currentUser] username]];
+        users = array;
+    }
     PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
     PFObject *object = [query getObjectWithId:self.object.objectId];
     [object setObject:users forKey:kParseSharedUserArrayKey];
@@ -110,7 +117,7 @@
 }
 
 -(void)makeFilePublic {
-    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:self.sharedUsers];
+    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:[self getSharedUsers]];
     if (![userArray containsObject:@"public"]) {
         NSArray *public = [[NSArray alloc] initWithObjects:@"public", nil];
         [userArray addObjectsFromArray:public];
@@ -119,6 +126,28 @@
         PFObject *object = [query getObjectWithId:self.object.objectId];
         [object setObject:userArray forKey:kParseSharedUserArrayKey];
         [object save];
+    }
+}
+
+-(void)makeFilePrivate {
+    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:[self getSharedUsers]];
+    if ([userArray containsObject:@"public"]) {
+        NSArray *public = [[NSArray alloc] initWithObjects:@"public", nil];
+        [userArray removeObjectsInArray:public];
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        [query includeKey:kParseSharedUserArrayKey];
+        PFObject *object = [query getObjectWithId:self.object.objectId];
+        [object setObject:userArray forKey:kParseSharedUserArrayKey];
+        [object save];
+    }
+}
+
+- (BOOL)isFilePublic {
+    NSMutableArray *userArray = [[NSMutableArray alloc] initWithArray:[self getSharedUsers]];
+    if([userArray containsObject:@"public"]) {
+        return true;
+    } else {
+        return false;
     }
 }
 

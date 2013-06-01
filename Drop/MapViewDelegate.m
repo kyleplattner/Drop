@@ -45,20 +45,22 @@
 }
 
 - (void)mapView:(MKMapView *)MapView didSelectAnnotationView:(MKAnnotationView *)view {
-    _droppedPin = view.annotation;
-    DroppedPinViewController *droppedPinView = [[DroppedPinViewController alloc]initWithNibName:@"DroppedPinViewController" mapView:self.mapView annotation:_droppedPin];
-    if (self.popoverController == nil) {
-        UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:droppedPinView];
-        popover.delegate = self;
-        self.popoverController = popover;
-    } else {
-        [_popoverController setContentViewController:droppedPinView animated:YES];
+    if (![view.annotation isKindOfClass:[MKUserLocation class]]) {
+        _droppedPin = view.annotation;
+        DroppedPinViewController *droppedPinView = [[DroppedPinViewController alloc]initWithNibName:@"DroppedPinViewController" mapView:self.mapView annotation:_droppedPin];
+        if (self.popoverController == nil) {
+            UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:droppedPinView];
+            popover.delegate = self;
+            self.popoverController = popover;
+        } else {
+            [_popoverController setContentViewController:droppedPinView animated:YES];
+        }
+        [_popoverController setPopoverContentSize:CGSizeMake(382, 110)];
+        [_popoverController setPopoverBackgroundViewClass:[GIKPopoverBackgroundView class]];
+        CGPoint annotationPoint = [self.mapView convertCoordinate:view.annotation.coordinate toPointToView:self.mapView];
+        CGRect box = CGRectMake(annotationPoint.x, annotationPoint.y, 5, 5);
+        [_popoverController presentPopoverFromRect:box inView:_mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    [_popoverController setPopoverContentSize:CGSizeMake(430, 400)];
-    [_popoverController setPopoverBackgroundViewClass:[GIKPopoverBackgroundView class]];
-    CGPoint annotationPoint = [self.mapView convertCoordinate:view.annotation.coordinate toPointToView:self.mapView];
-    CGRect box = CGRectMake(annotationPoint.x, annotationPoint.y, 5, 5);
-    [_popoverController presentPopoverFromRect:box inView:_mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
