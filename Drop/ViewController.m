@@ -43,7 +43,7 @@
 
 - (IBAction)settingsButtonPressed:(id)sender {
     _settingsViewController = [[SettingsViewController alloc] init];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"TransferDelegateNotification" object:self];
+    [_settingsViewController setViewController:self];
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Log Out" message:nil delegate:_settingsViewController cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out of Drop", @"Log out of Dropbox", nil];
     [alertView show];
 }
@@ -92,6 +92,7 @@
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
     }
+    [_mapViewDelegate queryForAllPosts];
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {

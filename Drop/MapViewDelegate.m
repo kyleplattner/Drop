@@ -55,7 +55,11 @@
         } else {
             [_popoverController setContentViewController:droppedPinView animated:YES];
         }
-        [_popoverController setPopoverContentSize:CGSizeMake(382, 110)];
+        if ([[_droppedPin getUsername] isEqualToString:[[PFUser currentUser] username]]) {
+            [_popoverController setPopoverContentSize:CGSizeMake(337, 165)];
+        } else {
+            [_popoverController setPopoverContentSize:CGSizeMake(337, 113)];
+        }
         [_popoverController setPopoverBackgroundViewClass:[GIKPopoverBackgroundView class]];
         CGPoint annotationPoint = [self.mapView convertCoordinate:view.annotation.coordinate toPointToView:self.mapView];
         CGRect box = CGRectMake(annotationPoint.x, annotationPoint.y, 5, 5);

@@ -60,8 +60,9 @@
 - (void)setup
 {
     self.backgroundColor = [UIColor clearColor];
-    self.titleLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+    self.titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.titleLabel.shadowColor = [UIColor whiteColor];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:12.0f];
     self.shouldShowDisabled = NO;
     [self setType:BButtonTypeDefault];
 }
@@ -164,17 +165,17 @@
     
     if([newColor isLightColor]) {
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [self setTitleShadowColor:[[UIColor whiteColor] colorWithAlphaComponent:0.6f] forState:UIControlStateNormal];
+        [self setTitleShadowColor:[[UIColor whiteColor] colorWithAlphaComponent:1.f] forState:UIControlStateNormal];
         
         if(self.shouldShowDisabled)
-            [self setTitleColor:[UIColor colorWithWhite:0.4f alpha:0.5f] forState:UIControlStateDisabled];
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
     else {
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self setTitleShadowColor:[[UIColor blackColor] colorWithAlphaComponent:0.6f] forState:UIControlStateNormal];
+        [self setTitleShadowColor:[[UIColor blackColor] colorWithAlphaComponent:1.f] forState:UIControlStateNormal];
         
         if(self.shouldShowDisabled)
-            [self setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
     
     if(self.shouldShowDisabled)
@@ -191,15 +192,15 @@
     
     if(show) {
         if([self.color isLightColor])
-            [self setTitleColor:[UIColor colorWithWhite:0.4f alpha:0.5f] forState:UIControlStateDisabled];
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         else
-            [self setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateDisabled];
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
     else {
         if([self.color isLightColor])
-            [self setTitleColor:[UIColor blackColor] forState:UIControlStateDisabled];
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         else
-            [self setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
+            [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     }
 }
 

@@ -39,15 +39,20 @@
     self.userPickerView.delegate = self;
     [self.userPickerView setPlaceholderString:@"Type Usernames to Share With"];
     [self.view addSubview:self.userPickerView];
+    [self.userPickerView setBackgroundColor:[UIColor colorWithRed:0.988 green:0.984 blue:0.966 alpha:1.000]];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.964 green:0.955 blue:0.914 alpha:1.000];
     
     //add already selected users to selected array
     
     for (NSString *user in _drop.sharedUsers) {
-        [self.selectedUsers addObject:user];
-        [self.userPickerView addUser:user withName:user];
+        if(![user isEqualToString:[[PFUser currentUser] username]]) {
+            [self.selectedUsers addObject:user];
+            [self.userPickerView addUser:user withName:user];
+        }
     }
+    [self adjustTableViewFrame];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,10 +60,7 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
-    //remove revoked users
-    if([self.selectedUsers count] > 0) {
-        [_drop shareFileWithUsers:self.selectedUsers];
-    }
+    [_drop shareFileWithUsers:self.selectedUsers];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,13 +68,10 @@
 }
 
 - (void)adjustTableViewFrame {
-    //TODO: figure out adjustments to tableview
-    NSLog(@"Before %@", NSStringFromCGRect(self.tableView.frame));
     CGRect frame = self.tableView.frame;
     frame.origin.y = self.userPickerView.frame.size.height;
     frame.size.height = self.view.frame.size.height - self.userPickerView.frame.size.height;
     self.tableView.frame = frame;
-    NSLog(@"After %@", NSStringFromCGRect(self.tableView.frame));
 }
 
 -(void)dispatchDismiss {

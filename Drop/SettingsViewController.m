@@ -16,7 +16,6 @@
     DBRestClient *restClient;
 }
 
-@property (nonatomic, weak, readonly) ViewController *viewController;
 @property (weak, nonatomic) IBOutlet BButton *dropBoxButton;
 
 - (IBAction)setupButtonPressed:(id)sender;
@@ -43,7 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupButtonPressed:) name:@"DropboxNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDelegate:) name:@"TransferDelegateNotification" object:nil];
     if ([[DBSession sharedSession] isLinked]) {
         [_dropBoxButton setTitle:@"Browse Dropbox" forState:UIControlStateNormal];
     }
@@ -91,11 +89,12 @@
     [signUpViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [signUpViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [self presentViewController:navController animated:YES completion:nil];
+    [_viewController performSelector:@selector(logInUser) withObject:nil afterDelay:1];
 }
 
 - (IBAction)unlinkDropboxButtonPressed:(id)sender {
     [[DBSession sharedSession] unlinkAll];
-    [[DBSession sharedSession] linkFromController:self];
+    [[DBSession sharedSession] linkFromController:_viewController];
 }
 
 - (void)setupDelegate:(NSNotification*)notification {

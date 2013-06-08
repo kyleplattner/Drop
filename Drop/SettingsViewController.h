@@ -13,5 +13,5 @@
 #import "ViewController.h"
 
 @interface SettingsViewController : UIViewController <KioskDropboxPDFBrowserViewControllerUIDelegate, DBRestClientDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
-
+@property (nonatomic, retain) ViewController *viewController;
 @end

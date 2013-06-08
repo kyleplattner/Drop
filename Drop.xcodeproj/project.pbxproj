@@ -74,6 +74,11 @@
 		EB4DD152172DE5E2001D3070 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD151172DE5E2001D3070 /* icon144.png */; };
 		EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD153172DE609001D3070 /* MapKit.framework */; };
 		EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD155172DE618001D3070 /* CoreLocation.framework */; };
+		EB610E22176233F800AAECFF /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB610E21176233F800AAECFF /* fontawesome-webfont.ttf */; };
+		EB610E4117627D9A00AAECFF /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = EB610E3A17627D9A00AAECFF /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EB610E4217627D9A00AAECFF /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB610E3C17627D9A00AAECFF /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EB610E4317627D9A00AAECFF /* DCRoundSwitchOutlineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB610E3E17627D9A00AAECFF /* DCRoundSwitchOutlineLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		EB610E4417627D9A00AAECFF /* DCRoundSwitchToggleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB610E4017627D9A00AAECFF /* DCRoundSwitchToggleLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EB741DBF1758E1050058B2CC /* test.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB741DBE1758E1050058B2CC /* test.gpx */; };
 		EB741DFD175A49130058B2CC /* aac.png in Resources */ = {isa = PBXBuildFile; fileRef = EB741DC2175A49130058B2CC /* aac.png */; };
 		EB741DFE175A49130058B2CC /* ai.png in Resources */ = {isa = PBXBuildFile; fileRef = EB741DC3175A49130058B2CC /* ai.png */; };
@@ -370,6 +375,15 @@
 		EB4DD151172DE5E2001D3070 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
 		EB4DD153172DE609001D3070 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EB4DD155172DE618001D3070 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EB610E21176233F800AAECFF /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		EB610E3917627D9A00AAECFF /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
+		EB610E3A17627D9A00AAECFF /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
+		EB610E3B17627D9A00AAECFF /* DCRoundSwitchKnobLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchKnobLayer.h; sourceTree = "<group>"; };
+		EB610E3C17627D9A00AAECFF /* DCRoundSwitchKnobLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchKnobLayer.m; sourceTree = "<group>"; };
+		EB610E3D17627D9A00AAECFF /* DCRoundSwitchOutlineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchOutlineLayer.h; sourceTree = "<group>"; };
+		EB610E3E17627D9A00AAECFF /* DCRoundSwitchOutlineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchOutlineLayer.m; sourceTree = "<group>"; };
+		EB610E3F17627D9A00AAECFF /* DCRoundSwitchToggleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitchToggleLayer.h; sourceTree = "<group>"; };
+		EB610E4017627D9A00AAECFF /* DCRoundSwitchToggleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitchToggleLayer.m; sourceTree = "<group>"; };
 		EB741DBE1758E1050058B2CC /* test.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.gpx; sourceTree = "<group>"; };
 		EB741DC2175A49130058B2CC /* aac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aac.png; sourceTree = "<group>"; };
 		EB741DC3175A49130058B2CC /* ai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ai.png; sourceTree = "<group>"; };
@@ -802,6 +816,7 @@
 		EB4DD133172DE5CF001D3070 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				EB610E21176233F800AAECFF /* fontawesome-webfont.ttf */,
 				EB4DD134172DE5CF001D3070 /* Drop-Info.plist */,
 				EB4DD135172DE5CF001D3070 /* InfoPlist.strings */,
 				EB4DD138172DE5CF001D3070 /* main.m */,
@@ -812,6 +827,21 @@
 				EB1560D7173ED16100468E6B /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB610E3817627D9A00AAECFF /* DCRoundSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				EB610E3917627D9A00AAECFF /* DCRoundSwitch.h */,
+				EB610E3A17627D9A00AAECFF /* DCRoundSwitch.m */,
+				EB610E3B17627D9A00AAECFF /* DCRoundSwitchKnobLayer.h */,
+				EB610E3C17627D9A00AAECFF /* DCRoundSwitchKnobLayer.m */,
+				EB610E3D17627D9A00AAECFF /* DCRoundSwitchOutlineLayer.h */,
+				EB610E3E17627D9A00AAECFF /* DCRoundSwitchOutlineLayer.m */,
+				EB610E3F17627D9A00AAECFF /* DCRoundSwitchToggleLayer.h */,
+				EB610E4017627D9A00AAECFF /* DCRoundSwitchToggleLayer.m */,
+			);
+			path = DCRoundSwitch;
 			sourceTree = "<group>";
 		};
 		EB741DC1175A48E90058B2CC /* File Type Icons */ = {
@@ -1117,6 +1147,7 @@
 		EBF33354173564F4006D690E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				EB610E3817627D9A00AAECFF /* DCRoundSwitch */,
 				EBE813F31754DC62001AC56D /* FrameAccessor.h */,
 				EBE813F41754DC62001AC56D /* FrameAccessor.m */,
 				EBCE27311735A42C00A63696 /* BButton */,
@@ -1371,6 +1402,7 @@
 				EB741EAB175A4AD40058B2CC /* yml@2x.png in Resources */,
 				EB741EAC175A4AD40058B2CC /* zip@2x.png in Resources */,
 				EB741EAD175A4AD40058B2CC /* aiff@2x.png in Resources */,
+				EB610E22176233F800AAECFF /* fontawesome-webfont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1437,6 +1469,10 @@
 				EBE813CF17529F0D001AC56D /* UserPickerView.m in Sources */,
 				EBE813D017529F0D001AC56D /* UserPickerViewController.m in Sources */,
 				EBE813F51754DC62001AC56D /* FrameAccessor.m in Sources */,
+				EB610E4117627D9A00AAECFF /* DCRoundSwitch.m in Sources */,
+				EB610E4217627D9A00AAECFF /* DCRoundSwitchKnobLayer.m in Sources */,
+				EB610E4317627D9A00AAECFF /* DCRoundSwitchOutlineLayer.m in Sources */,
+				EB610E4417627D9A00AAECFF /* DCRoundSwitchToggleLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -114,6 +114,7 @@
     PFObject *object = [query getObjectWithId:self.object.objectId];
     [object setObject:users forKey:kParseSharedUserArrayKey];
     [object save];
+    self.sharedUsers = users;
 }
 
 -(void)makeFilePublic {
@@ -122,10 +123,10 @@
         NSArray *public = [[NSArray alloc] initWithObjects:@"public", nil];
         [userArray addObjectsFromArray:public];
         PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-        [query includeKey:kParseSharedUserArrayKey];
         PFObject *object = [query getObjectWithId:self.object.objectId];
         [object setObject:userArray forKey:kParseSharedUserArrayKey];
         [object save];
+        self.sharedUsers = userArray;
     }
 }
 
@@ -135,10 +136,10 @@
         NSArray *public = [[NSArray alloc] initWithObjects:@"public", nil];
         [userArray removeObjectsInArray:public];
         PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-        [query includeKey:kParseSharedUserArrayKey];
         PFObject *object = [query getObjectWithId:self.object.objectId];
         [object setObject:userArray forKey:kParseSharedUserArrayKey];
         [object save];
+        self.sharedUsers = userArray;
     }
 }
 

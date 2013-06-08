@@ -37,6 +37,7 @@
     if (![self.dataController isDropboxLinked]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Drop is not linked to your Dropbox account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
+        [self removeDropboxBrowser];
     }
     else {
         [self.rootViewController listHomeDirectory];
