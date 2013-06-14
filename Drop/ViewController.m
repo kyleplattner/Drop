@@ -12,13 +12,19 @@
 #import <Parse/Parse.h>
 #import "Drop.h"
 #import "NPReachability.h"
+#import "GIKPopoverBackgroundView.h"
 #import "SettingsViewController.h"
 
 @interface ViewController ()
 @property (nonatomic, retain) SettingsViewController *settingsViewController;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UISearchDisplayController *searchController;
+@property (nonatomic, retain) NSMutableArray *filteredDrops;
+@property (nonatomic, retain) NSMutableArray *allDrops;
 - (IBAction)settingsButtonPressed:(id)sender;
 - (void)logInUser;
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
+- (void)populateArrayForSearching;
 @end
 
 @implementation ViewController
@@ -33,7 +39,23 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longPress.minimumPressDuration = 2.0;
     [self.mapView addGestureRecognizer:longPress];
+    _filteredDrops = [[NSMutableArray alloc] initWithCapacity:100];
+    _allDrops = [[NSMutableArray alloc] initWithCapacity:100];
     [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
+    [self performSelector:@selector(populateArrayForSearching) withObject:nil afterDelay:2];
+    [_searchBar setDelegate:self];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)populateArrayForSearching {
+    [_filteredDrops removeAllObjects];
+    for (Drop *drop in _mapView.annotations) {
+        [_filteredDrops addObject:drop];
+    }
+    _allDrops = _filteredDrops;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,6 +157,48 @@
 
 - (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController {
     NSLog(@"User dismissed the signUpViewController");
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reusable"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reusable"];
+    }
+    
+    Drop *drop = [_filteredDrops objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", drop.filename];
+    cell.detailTextLabel.text = drop.username;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Drop *drop = [_filteredDrops objectAtIndex:indexPath.row];
+    [_mapView selectAnnotation:drop animated:YES];
+    [_searchBar resignFirstResponder];
+    [_searchController setActive:NO animated:YES];
+    [_searchBar setText:@""];
+    [self populateArrayForSearching];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _filteredDrops.count;
+}
+ 
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([searchText length] == 0) {
+        _filteredDrops = _allDrops;
+        [_searchBar resignFirstResponder];
+        [_searchController setActive:NO animated:YES];
+    } else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"filename contains[cd] %@ OR username contains[cd] %@", searchText, searchText];
+        NSMutableArray *filtered = [NSMutableArray arrayWithArray:[_allDrops filteredArrayUsingPredicate:predicate]];
+        _filteredDrops = filtered;
+    }
+}
+
+-(void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
+    [controller setSearchResultsTitle:@"Select a Drop"];
 }
 
 @end

@@ -72,6 +72,7 @@
     frame.origin.y = self.userPickerView.frame.size.height;
     frame.size.height = self.view.frame.size.height - self.userPickerView.frame.size.height;
     self.tableView.frame = frame;
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 -(void)dispatchDismiss {

@@ -797,6 +797,7 @@
 		EB4DD132172DE5CF001D3070 /* Drop */ = {
 			isa = PBXGroup;
 			children = (
+				EB610E451763BECB00AAECFF /* File Table */,
 				EBF3321417333DE3006D690E /* Images */,
 				EBE813C317529EDC001AC56D /* File Sharing */,
 				EB1560DC17427D4F00468E6B /* Core Data */,
@@ -842,6 +843,13 @@
 				EB610E4017627D9A00AAECFF /* DCRoundSwitchToggleLayer.m */,
 			);
 			path = DCRoundSwitch;
+			sourceTree = "<group>";
+		};
+		EB610E451763BECB00AAECFF /* File Table */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "File Table";
 			sourceTree = "<group>";
 		};
 		EB741DC1175A48E90058B2CC /* File Type Icons */ = {

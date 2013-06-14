@@ -17,6 +17,8 @@
 @property (nonatomic, weak, readonly) UIViewController* view;
 @property (nonatomic, retain) UIPopoverController* popoverController;
 @property (nonatomic, retain) Drop* droppedPin;
+@property (nonatomic, strong) NSMutableArray *allPosts;
+@property (nonatomic, strong) NSMutableArray *annotations;
 
 - (id)initWithMapView:(MKMapView*)mapView viewController:(UIViewController*)view;
 - (void)startStandardUpdates;

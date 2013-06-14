@@ -18,8 +18,6 @@
 @interface MapViewDelegate ()
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) BOOL mapPinsPlaced;
-@property (nonatomic, strong) NSMutableArray *allPosts;
-@property (nonatomic, strong) NSMutableArray *annotations;
 @end
 
 @implementation MapViewDelegate
