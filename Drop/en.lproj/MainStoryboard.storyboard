@@ -12,6 +12,15 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3N6-gm-Mby">
+                                <rect key="frame" x="224" y="44" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="2" id="VpJ-T0-nzF"/>
+                                    <outlet property="delegate" destination="2" id="RFT-eK-QFA"/>
+                                </connections>
+                            </tableView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="MAA-y4-bbY">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                             </mapView>
@@ -48,30 +57,26 @@
                                 </items>
                                 <color key="tintColor" red="0.55013415130363663" green="0.76418566703796387" blue="0.52374910436487843" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logoSmall.png" id="KyD-9A-DT7">
+                                <rect key="frame" x="334" y="4" width="100" height="40"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="logo" destination="KyD-9A-DT7" id="U9Q-4F-yb4"/>
                         <outlet property="mapView" destination="MAA-y4-bbY" id="vho-wO-0e4"/>
                         <outlet property="searchBar" destination="qbV-5K-nNI" id="u9e-f0-rD8"/>
-                        <outlet property="searchController" destination="1uz-Ck-7gA" id="EA4-9T-08L"/>
-                        <outlet property="searchDisplayController" destination="1uz-Ck-7gA" id="w11-Je-NW3"/>
+                        <outlet property="tableView" destination="3N6-gm-Mby" id="oV6-ef-b7a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="1uz-Ck-7gA">
-                    <connections>
-                        <outlet property="delegate" destination="2" id="RY5-Ax-eno"/>
-                        <outlet property="searchBar" destination="qbV-5K-nNI" id="GOs-6f-yZo"/>
-                        <outlet property="searchContentsController" destination="2" id="kWS-ND-cs7"/>
-                        <outlet property="searchResultsDataSource" destination="2" id="YGV-Bp-fnE"/>
-                        <outlet property="searchResultsDelegate" destination="2" id="f9T-b9-PDr"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
         </scene>
     </scenes>
     <resources>
+        <image name="logoSmall.png" width="100" height="40"/>
         <image name="settingsIcon.png" width="50" height="50"/>
     </resources>
     <classes>
@@ -79,10 +84,10 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="settingsButtonPressed:"/>
+                <relationship kind="outlet" name="logo" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-                <relationship kind="outlet" name="searchController" candidateClass="UISearchDisplayController"/>
-                <relationship kind="outlet" name="searchDisplayController" candidateClass="UISearchDisplayController"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
     </classes>

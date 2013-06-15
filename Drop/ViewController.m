@@ -17,14 +17,18 @@
 
 @interface ViewController ()
 @property (nonatomic, retain) SettingsViewController *settingsViewController;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet UISearchDisplayController *searchController;
+@property (retain, nonatomic) UIViewController *searchView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (retain, nonatomic) UIPopoverController *searchResultsPopover;
 @property (nonatomic, retain) NSMutableArray *filteredDrops;
 @property (nonatomic, retain) NSMutableArray *allDrops;
 - (IBAction)settingsButtonPressed:(id)sender;
 - (void)logInUser;
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
 - (void)populateArrayForSearching;
+- (void)loadSearchPopover;
 @end
 
 @implementation ViewController
@@ -41,9 +45,16 @@
     [self.mapView addGestureRecognizer:longPress];
     _filteredDrops = [[NSMutableArray alloc] initWithCapacity:100];
     _allDrops = [[NSMutableArray alloc] initWithCapacity:100];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateArrayForSearching) name:@"ReloadAnnoationsNotification" object:nil];
     [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
     [self performSelector:@selector(populateArrayForSearching) withObject:nil afterDelay:2];
     [_searchBar setDelegate:self];
+    [_tableView setDelegate:self];
+    [_tableView setDataSource:self];
+    _searchView = [[UIViewController alloc] init];
+    [_searchView.view addSubview:_tableView];
+    [_searchView setContentSizeForViewInPopover:CGSizeMake(300, 500)];
+    [_searchBar setAlpha:0];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -55,12 +66,23 @@
     for (Drop *drop in _mapView.annotations) {
         [_filteredDrops addObject:drop];
     }
+    [_tableView reloadData];
     _allDrops = _filteredDrops;
+    if([_allDrops count] > 0) {
+        [UIView animateWithDuration:.5 animations:^{
+            [_logo setAlpha:0];
+            [_searchBar setAlpha:1];
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {
@@ -175,8 +197,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Drop *drop = [_filteredDrops objectAtIndex:indexPath.row];
     [_mapView selectAnnotation:drop animated:YES];
+    [_searchResultsPopover dismissPopoverAnimated:YES];
+    _searchResultsPopover = nil;
     [_searchBar resignFirstResponder];
-    [_searchController setActive:NO animated:YES];
     [_searchBar setText:@""];
     [self populateArrayForSearching];
 }
@@ -184,21 +207,36 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _filteredDrops.count;
 }
- 
+
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if ([searchText length] == 0) {
         _filteredDrops = _allDrops;
         [_searchBar resignFirstResponder];
-        [_searchController setActive:NO animated:YES];
+        [_searchResultsPopover dismissPopoverAnimated:YES];
     } else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"filename contains[cd] %@ OR username contains[cd] %@", searchText, searchText];
         NSMutableArray *filtered = [NSMutableArray arrayWithArray:[_allDrops filteredArrayUsingPredicate:predicate]];
         _filteredDrops = filtered;
+        [_tableView reloadData];
+        [self loadSearchPopover];
     }
 }
 
--(void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
-    [controller setSearchResultsTitle:@"Select a Drop"];
+-(void)loadSearchPopover {
+    if (_searchResultsPopover == nil && [_allDrops count] > 0) {
+        _searchResultsPopover = [[UIPopoverController alloc] initWithContentViewController:_searchView];
+        [_searchView.view setFrame:CGRectMake((self.view.frame.size.width / 2) - 386, 0, 200, 500)];
+        [_tableView setFrame:_searchView.view.frame];
+        [_searchResultsPopover setPopoverBackgroundViewClass:[GIKPopoverBackgroundView class]];
+        [_searchResultsPopover setDelegate:self];
+        [_searchResultsPopover presentPopoverFromRect:_searchBar.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+}
+
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    _searchResultsPopover = nil;
+    [_searchBar resignFirstResponder];
+    [_searchBar setText:@""];
 }
 
 @end

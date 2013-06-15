@@ -74,6 +74,8 @@
 		EB4DD152172DE5E2001D3070 /* icon144.png in Resources */ = {isa = PBXBuildFile; fileRef = EB4DD151172DE5E2001D3070 /* icon144.png */; };
 		EB4DD154172DE609001D3070 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD153172DE609001D3070 /* MapKit.framework */; };
 		EB4DD156172DE618001D3070 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4DD155172DE618001D3070 /* CoreLocation.framework */; };
+		EB5F32D9176BC0F3006FFF43 /* logoSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = EB5F32D7176BC0F3006FFF43 /* logoSmall.png */; };
+		EB5F32DA176BC0F3006FFF43 /* logoSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB5F32D8176BC0F3006FFF43 /* logoSmall@2x.png */; };
 		EB610E22176233F800AAECFF /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB610E21176233F800AAECFF /* fontawesome-webfont.ttf */; };
 		EB610E4117627D9A00AAECFF /* DCRoundSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = EB610E3A17627D9A00AAECFF /* DCRoundSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EB610E4217627D9A00AAECFF /* DCRoundSwitchKnobLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB610E3C17627D9A00AAECFF /* DCRoundSwitchKnobLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -375,6 +377,8 @@
 		EB4DD151172DE5E2001D3070 /* icon144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144.png; sourceTree = "<group>"; };
 		EB4DD153172DE609001D3070 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EB4DD155172DE618001D3070 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EB5F32D7176BC0F3006FFF43 /* logoSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoSmall.png; sourceTree = "<group>"; };
+		EB5F32D8176BC0F3006FFF43 /* logoSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logoSmall@2x.png"; sourceTree = "<group>"; };
 		EB610E21176233F800AAECFF /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		EB610E3917627D9A00AAECFF /* DCRoundSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCRoundSwitch.h; sourceTree = "<group>"; };
 		EB610E3A17627D9A00AAECFF /* DCRoundSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCRoundSwitch.m; sourceTree = "<group>"; };
@@ -797,7 +801,6 @@
 		EB4DD132172DE5CF001D3070 /* Drop */ = {
 			isa = PBXGroup;
 			children = (
-				EB610E451763BECB00AAECFF /* File Table */,
 				EBF3321417333DE3006D690E /* Images */,
 				EBE813C317529EDC001AC56D /* File Sharing */,
 				EB1560DC17427D4F00468E6B /* Core Data */,
@@ -843,13 +846,6 @@
 				EB610E4017627D9A00AAECFF /* DCRoundSwitchToggleLayer.m */,
 			);
 			path = DCRoundSwitch;
-			sourceTree = "<group>";
-		};
-		EB610E451763BECB00AAECFF /* File Table */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "File Table";
 			sourceTree = "<group>";
 		};
 		EB741DC1175A48E90058B2CC /* File Type Icons */ = {
@@ -1132,6 +1128,8 @@
 				EB1560B4173E933300468E6B /* logo@2x.png */,
 				EBF3321517333DF1006D690E /* settingsIcon.png */,
 				EBF3321617333DF1006D690E /* settingsIcon@2x.png */,
+				EB5F32D7176BC0F3006FFF43 /* logoSmall.png */,
+				EB5F32D8176BC0F3006FFF43 /* logoSmall@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1411,6 +1409,8 @@
 				EB741EAC175A4AD40058B2CC /* zip@2x.png in Resources */,
 				EB741EAD175A4AD40058B2CC /* aiff@2x.png in Resources */,
 				EB610E22176233F800AAECFF /* fontawesome-webfont.ttf in Resources */,
+				EB5F32D9176BC0F3006FFF43 /* logoSmall.png in Resources */,
+				EB5F32DA176BC0F3006FFF43 /* logoSmall@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

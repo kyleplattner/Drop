@@ -230,8 +230,6 @@ static NSString* currentFileName = nil;
 - (void)downloadedFile {
     [self.downloadProgressView setHidden:TRUE];
     self.title = @"Select File to Drop";
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Added to Location" message:@"The File has been sucessfully added to this location." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [alertView show];
     [[self rootViewDelegate] loadedFileFromDropbox:currentFileName];
 }
 

@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "MapViewDelegate.h"
 
-@interface ViewController : UIViewController<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
+@interface ViewController : UIViewController<PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIPopoverControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
