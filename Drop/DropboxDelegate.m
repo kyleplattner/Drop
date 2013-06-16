@@ -19,8 +19,7 @@
 
 @implementation DropboxDelegate
 
-- (id)init
-{
+- (id)init {
     self = [super init];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeDropboxBrowser) name:@"RemoveBrowserNotification" object:nil];
