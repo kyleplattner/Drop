@@ -46,6 +46,7 @@
     _filteredDrops = [[NSMutableArray alloc] initWithCapacity:100];
     _allDrops = [[NSMutableArray alloc] initWithCapacity:100];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateArrayForSearching) name:@"ReloadAnnoationsNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logInUser) name:@"TryLoginNotification" object:nil];
     [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
     [self performSelector:@selector(populateArrayForSearching) withObject:nil afterDelay:2];
     [_searchBar setDelegate:self];
@@ -88,32 +89,14 @@
 - (IBAction)settingsButtonPressed:(id)sender {
     _settingsViewController = [[SettingsViewController alloc] init];
     [_settingsViewController setViewController:self];
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Log Out" message:nil delegate:_settingsViewController cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log out of Drop", @"Log out of Dropbox", nil];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Would you like to Log Out?" message:nil delegate:_settingsViewController cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log Out", nil];
     [alertView show];
 }
 
 - (void)logInUser {
-    PFUser *currentUser = [PFUser currentUser];
-	if (currentUser) {
-        if (![[DBSession sharedSession] isLinked]) {
-            [[DBSession sharedSession] linkFromController:self];
-        }
-    } else {
-        LogInViewController *loginViewController = [[LogInViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-        loginViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton | PFLogInFieldsSignUpButton;
-        loginViewController.delegate = self;
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-        [navController.navigationBar setHidden:YES];
-        [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
-        signUpViewController.delegate = self;
-        signUpViewController.fields = PFSignUpFieldsDefault;
-        loginViewController.signUpController = signUpViewController;
-        [signUpViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-        [signUpViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [self presentViewController:navController animated:YES completion:nil];
-	}
+    if (![[DBSession sharedSession] isLinked]) {
+        [[DBSession sharedSession] linkFromController:self];
+    }
 }
 
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer {
@@ -129,56 +112,6 @@
         [self.mapView addAnnotation:drop];
         [_mapViewDelegate linkDropboxFileForDrop:drop];
     }
-}
-
-- (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    if (![[DBSession sharedSession] isLinked]) {
-        [[DBSession sharedSession] linkFromController:self];
-    }
-    [_mapViewDelegate queryForAllPosts];
-}
-
-- (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
-    NSLog(@"Failed to log in...");
-}
-
-- (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
-    if (username && password && username.length && password.length) {
-        return YES;
-    }
-    
-    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out your username, password, and email address", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-    return NO;
-}
-
-- (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
-    BOOL informationComplete = YES;
-    for (id key in info) {
-        NSString *field = [info objectForKey:key];
-        if (!field || field.length == 0) {
-            informationComplete = NO;
-            break;
-        }
-    }
-    
-    if (!informationComplete) {
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the fields", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
-    }
-    
-    return informationComplete;
-}
-
-- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error {
-    NSLog(@"Failed to sign up...");
-}
-
-- (void)signUpViewControllerDidCancelSignUp:(PFSignUpViewController *)signUpController {
-    NSLog(@"User dismissed the signUpViewController");
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

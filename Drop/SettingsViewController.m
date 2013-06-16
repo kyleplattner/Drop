@@ -74,21 +74,8 @@
 }
 
 - (IBAction)logOutButtonPressed:(id)sender {
+    [self unlinkDropboxButtonPressed:nil];
     [PFUser logOut];
-    LogInViewController *loginViewController = [[LogInViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    loginViewController.fields = PFLogInFieldsUsernameAndPassword | PFLogInFieldsLogInButton | PFLogInFieldsSignUpButton;
-    loginViewController.delegate = _viewController;
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    [navController.navigationBar setHidden:YES];
-    [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [navController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    SignUpViewController *signUpViewController = [[SignUpViewController alloc] init];
-    signUpViewController.delegate = _viewController;
-    signUpViewController.fields = PFSignUpFieldsDefault;
-    loginViewController.signUpController = signUpViewController;
-    [signUpViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [signUpViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [self presentViewController:navController animated:YES completion:nil];
     [_viewController performSelector:@selector(logInUser) withObject:nil afterDelay:1];
 }
 
@@ -120,11 +107,8 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    //TODO: Clean up code
     if(buttonIndex == 1) {
         [self logOutButtonPressed:nil];
-    } else if (buttonIndex == 2) {
-        [self unlinkDropboxButtonPressed:nil];
     }
 }
 

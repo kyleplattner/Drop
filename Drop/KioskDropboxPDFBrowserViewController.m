@@ -35,9 +35,10 @@
 #pragma mark - public functions
 - (void) listDropboxDirectory {
     if (![self.dataController isDropboxLinked]) {
+        [self removeDropboxBrowser];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Drop is not linked to your Dropbox account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
-        [self removeDropboxBrowser];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TryLoginNotification" object:nil];
     }
     else {
         [self.rootViewController listHomeDirectory];

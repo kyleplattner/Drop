@@ -68,8 +68,8 @@
 	}
 }
 
--(BOOL)canUserSeeDrop:(Drop *)drop {
-    if ([_sharedUsers containsObject:[drop getUsername]] || [_sharedUsers containsObject:@"public"]) {
+-(BOOL)canUserSeeDrop {
+    if ([_sharedUsers containsObject:[[PFUser currentUser] username]] || [_sharedUsers containsObject:@"public"]) {
         return YES;
     } else {
         return NO;

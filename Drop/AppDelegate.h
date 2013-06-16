@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <Parse/Parse.h>
+#import <DropboxSDK/DropboxSDK.h>
 
 static NSString * const kParsePostsClassKey = @"Drop";
 static NSString * const kParseUserClassKey = @"_User";
@@ -18,9 +20,10 @@ static NSString * const kParseFilenameKey = @"filename";
 static NSString * const kParseUsernameKey = @"username";
 static NSString * const kParseSharedUserArrayKey = @"users";
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate, DBRestClientDelegate> {
+    DBRestClient *restClient;
+}
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) CLLocation *currentLocation;
 
 @end

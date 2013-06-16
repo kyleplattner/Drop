@@ -11,7 +11,7 @@
 #import "DropboxDelegate.h"
 #import "Drop.h"
 
-@interface MapViewDelegate : NSObject <MKMapViewDelegate, UIPopoverControllerDelegate, CLLocationManagerDelegate>
+@interface MapViewDelegate : NSObject <MKMapViewDelegate, UIPopoverControllerDelegate>
 
 @property (nonatomic, weak, readonly) MKMapView* mapView;
 @property (nonatomic, weak, readonly) UIViewController* view;
@@ -21,8 +21,6 @@
 @property (nonatomic, strong) NSMutableArray *annotations;
 
 - (id)initWithMapView:(MKMapView*)mapView viewController:(UIViewController*)view;
-- (void)startStandardUpdates;
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation;
 - (void)queryForAllPosts;
 - (void)linkDropboxFileForDrop:(Drop*)drop;
 

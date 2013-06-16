@@ -26,7 +26,7 @@
 - (id)initWithDrop:(PFObject *)object;
 - (void)setDropBoxFile:(PFFile *)file;
 - (BOOL)equalToDrop:(Drop *)drop;
-- (BOOL)canUserSeeDrop:(Drop *)drop;
+- (BOOL)canUserSeeDrop;
 - (BOOL)isFilePublic;
 - (NSString *)getUsername;
 - (void)shareFileWithUsers:(NSArray *)users;

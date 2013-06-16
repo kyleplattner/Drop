@@ -127,8 +127,12 @@ static NSString* currentFileName = nil;
 #pragma mark - Table View Accessory Button
 
 - (void)moveToParentDirectory {
-    self.currentPath = [NSString stringWithFormat:@"/"];
-    [[self dataController] listDirectoryAtPath:self.currentPath];
+    if([self.currentPath isEqualToString:[NSString stringWithFormat:@"/"]]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RemoveBrowserNotification" object:nil];
+    } else {
+        self.currentPath = [NSString stringWithFormat:@"/"];
+        [[self dataController] listDirectoryAtPath:self.currentPath];
+    }
 }
 
 - (UIButton *)makeDetailDisclosureButton:(DisclosureType)disclosureType {

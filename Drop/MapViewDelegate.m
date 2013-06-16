@@ -16,8 +16,7 @@
 #import "GIKPopoverBackgroundView.h"
 
 @interface MapViewDelegate ()
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, assign) BOOL mapPinsPlaced;
+-(void)removeDrop:(NSNotification*)notification;
 @end
 
 @implementation MapViewDelegate
@@ -27,19 +26,17 @@
     if (self) {
         _mapView = mapView;
         _view = view;
-        _annotations = [[NSMutableArray alloc] initWithCapacity:100];
 		_allPosts = [[NSMutableArray alloc] initWithCapacity:100];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissPopover) name:@"DismissPopoverNotification" object:nil];
-        [self startStandardUpdates];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeDrop:) name:@"RemoveAnnoationNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryForAllPosts) name:@"QueryForAllPosts" object:nil];
         [self queryForAllPosts];
     }
     return self;
 }
 
 -(void)dealloc {
-    [_locationManager stopUpdatingLocation];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.mapPinsPlaced = NO;
 }
 
 - (void)mapView:(MKMapView *)MapView didSelectAnnotationView:(MKAnnotationView *)view {
@@ -128,6 +125,10 @@
     [KioskDropboxPDFBrowserViewController displayDropboxBrowserInPhoneStoryboard:iPhoneStoryboard displayDropboxBrowserInPadStoryboard:iPadStoryboard onView:_view withPresentationStyle:UIModalPresentationFormSheet withTransitionStyle:UIModalTransitionStyleFlipHorizontal withDelegate:dropBoxDelegate];
 }
 
+-(void)removeDrop:(NSNotification*)notification {
+    [_mapView removeAnnotation:[notification object]];
+}
+
 #pragma mark modal view controller delegate methods
 
 -(void)dismissPopover {
@@ -138,98 +139,53 @@
 #pragma mark - Fetch map pins
 
 - (void)queryForAllPosts {
-	PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
-	if ([self.allPosts count] == 0) {
-		query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-	}
-	[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-		if (error) {
-			NSLog(@"%@", [error localizedDescription]);
-		} else {
-			NSMutableArray *newPosts = [[NSMutableArray alloc] initWithCapacity:100];
-			NSMutableArray *allNewPosts = [[NSMutableArray alloc] initWithCapacity:100];
-			for (PFObject *object in objects) {
-				Drop *drop = [[Drop alloc] initWithDrop:object];
-                if ([drop canUserSeeDrop:drop]) {
-                    [allNewPosts addObject:drop];
-                } else {
-                    NSLog(@"Denied Access");   
+    if([PFUser currentUser]) {
+        PFQuery *query = [PFQuery queryWithClassName:kParsePostsClassKey];
+        if ([self.allPosts count] == 0) {
+            query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+        }
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error) {
+                NSLog(@"%@", [error localizedDescription]);
+            } else {
+                NSMutableArray *newPosts = [[NSMutableArray alloc] initWithCapacity:100];
+                NSMutableArray *allNewPosts = [[NSMutableArray alloc] initWithCapacity:100];
+                for (PFObject *object in objects) {
+                    Drop *drop = [[Drop alloc] initWithDrop:object];
+                    if ([drop canUserSeeDrop]) {
+                        [allNewPosts addObject:drop];
+                    } else {
+                        NSLog(@"Denied Access");
+                    }
+                    BOOL found = NO;
+                    for (Drop *currentDrop in _allPosts) {
+                        if ([drop equalToDrop:currentDrop]) {
+                            found = YES;
+                        }
+                    }
+                    if (!found && [drop canUserSeeDrop]) {
+                        [newPosts addObject:drop];
+                    }
                 }
-				BOOL found = NO;
-				for (Drop *currentDrop in _allPosts) {
-					if ([drop equalToDrop:currentDrop]) {
-						found = YES;
-					}
-				}
-				if (!found) {
-					[newPosts addObject:drop];
-				}
-			}
-			NSMutableArray *postsToRemove = [[NSMutableArray alloc] initWithCapacity:100];
-			for (Drop *currentPost in _allPosts) {
-				BOOL found = NO;
-				for (Drop *allNewPost in allNewPosts) {
-					if ([currentPost equalToDrop:allNewPost]) {
-						found = YES;
-					}
-				}
-				if (!found) {
-					[postsToRemove addObject:currentPost];
-				}
-			}
-			[_mapView removeAnnotations:postsToRemove];
-			[_mapView addAnnotations:newPosts];
-			[_allPosts addObjectsFromArray:newPosts];
-			[_allPosts removeObjectsInArray:postsToRemove];
-			self.mapPinsPlaced = YES;
-		}
-	}];
-}
-
-#pragma mark - CLLocationManagerDelegate methods and helpers
-
-- (void)startStandardUpdates {
-	if (nil == _locationManager) {
-		_locationManager = [[CLLocationManager alloc] init];
-	}
-	_locationManager.delegate = self;
-	_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-	_locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
-	[_locationManager startUpdatingLocation];
-	CLLocation *currentLocation = _locationManager.location;
-	if (currentLocation) {
-		AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-		appDelegate.currentLocation = currentLocation;
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
-	switch (status) {
-		case kCLAuthorizationStatusAuthorized:
-			NSLog(@"kCLAuthorizationStatusAuthorized");
-			[_locationManager startUpdatingLocation];
-			break;
-		case kCLAuthorizationStatusDenied:
-			NSLog(@"kCLAuthorizationStatusDenied");
-        {{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Cannot Access Location" message:@"Drop can’t access your current location. Turn on access in the Settings app under Location Services." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-            [alertView show];
-        }}
-			break;
-		case kCLAuthorizationStatusNotDetermined:
-			NSLog(@"kCLAuthorizationStatusNotDetermined");
-			break;
-		case kCLAuthorizationStatusRestricted:
-			NSLog(@"kCLAuthorizationStatusRestricted");
-			break;
-	}
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-	NSLog(@"%s", __PRETTY_FUNCTION__);
-	AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-	appDelegate.currentLocation = newLocation;
+                NSMutableArray *postsToRemove = [[NSMutableArray alloc] initWithCapacity:100];
+                for (Drop *currentPost in _allPosts) {
+                    BOOL found = NO;
+                    for (Drop *allNewPost in allNewPosts) {
+                        if ([currentPost equalToDrop:allNewPost]) {
+                            found = YES;
+                        }
+                    }
+                    if (!found) {
+                        [postsToRemove addObject:currentPost];
+                    }
+                }
+                [_mapView removeAnnotations:postsToRemove];
+                [_mapView addAnnotations:newPosts];
+                [_allPosts addObjectsFromArray:newPosts];
+                [_allPosts removeObjectsInArray:postsToRemove];
+            }
+        }];
+    }
 }
 
 @end

@@ -19,6 +19,19 @@
 
 @implementation DropboxDelegate
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeDropboxBrowser) name:@"RemoveBrowserNotification" object:nil];
+    }
+    return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (DBRestClient *)restClient {
     if (!restClient) {
         restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
@@ -29,6 +42,7 @@
 
 - (void)removeDropboxBrowser {
     [_view dismissViewControllerAnimated:YES completion:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RemoveAnnoationNotification" object:_drop];
 }
 
 - (void)refreshLibrarySection {
