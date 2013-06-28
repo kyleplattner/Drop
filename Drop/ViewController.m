@@ -154,17 +154,20 @@
         _filteredDrops = _allDrops;
         [_searchBar resignFirstResponder];
         [_searchResultsPopover dismissPopoverAnimated:YES];
+        _searchResultsPopover = nil;
     } else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"filename contains[cd] %@ OR username contains[cd] %@", searchText, searchText];
         NSMutableArray *filtered = [NSMutableArray arrayWithArray:[_allDrops filteredArrayUsingPredicate:predicate]];
         _filteredDrops = filtered;
         [_tableView reloadData];
-        [self loadSearchPopover];
+        if(!_searchResultsPopover) {
+            [self loadSearchPopover];
+        }
     }
 }
 
 -(void)loadSearchPopover {
-    if (_searchResultsPopover == nil && [_allDrops count] > 0) {
+    if ([_allDrops count] > 0) {
         _searchResultsPopover = [[UIPopoverController alloc] initWithContentViewController:_searchView];
         [_searchView.view setFrame:CGRectMake((self.view.frame.size.width / 2) - 386, 0, 200, 500)];
         [_tableView setFrame:_searchView.view.frame];

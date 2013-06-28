@@ -19,16 +19,11 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     DBSession* dbSession = [[DBSession alloc] initWithAppKey:@"yii6grqm3mp900l" appSecret:@"pntxyr3j0ynf4j0" root:kDBRootDropbox];
     [DBSession setSharedSession:dbSession];
     [Parse setApplicationId:@"6ccB0yMKVEEo8i6kQmlKX6t3ryGX0Grma4VQDpQQ" clientKey:@"VRl41iG50ow5xDvQ2TtKr09bmA26stvoQpTVPi8m"];
     [TestFlight takeOff:@"490688de-870a-47bd-93ae-eab1185b43fa"];
-    
-//    [MagicalRecord setupAutoMigratingCoreDataStack];
-//    [FTASyncHandler sharedInstance];
-    
     return YES;
 }
 
