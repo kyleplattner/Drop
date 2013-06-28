@@ -29,6 +29,7 @@
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
 - (void)populateArrayForSearching;
 - (void)loadSearchPopover;
+- (void)selectAnnotation:(Drop*)annotation;
 @end
 
 @implementation ViewController
@@ -65,7 +66,9 @@
 - (void)populateArrayForSearching {
     [_filteredDrops removeAllObjects];
     for (Drop *drop in _mapView.annotations) {
-        [_filteredDrops addObject:drop];
+        if([drop isKindOfClass:[Drop class]]) {
+            [_filteredDrops addObject:drop];
+        }
     }
     [_tableView reloadData];
     _allDrops = _filteredDrops;
@@ -129,12 +132,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Drop *drop = [_filteredDrops objectAtIndex:indexPath.row];
-    [_mapView selectAnnotation:drop animated:YES];
+    [_mapView setCenterCoordinate:[drop coordinate] animated:YES];
+    [self performSelector:@selector(selectAnnotation:) withObject:drop afterDelay:1.5];
     [_searchResultsPopover dismissPopoverAnimated:YES];
     _searchResultsPopover = nil;
     [_searchBar resignFirstResponder];
     [_searchBar setText:@""];
     [self populateArrayForSearching];
+}
+
+-(void)selectAnnotation:(Drop*)annotation {
+    [_mapView selectAnnotation:annotation animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

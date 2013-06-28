@@ -15,6 +15,7 @@
     DBRestClient *restClient;
 }
 - (void)postFileWithName:(NSString *)name atPath:(NSString *)path;
+- (void)deleteAnnotationAndRemoveBrowser;
 @end
 
 @implementation DropboxDelegate
@@ -22,7 +23,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeDropboxBrowser) name:@"RemoveBrowserNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteAnnotationAndRemoveBrowser) name:@"RemoveBrowserNotification" object:nil];
     }
     return self;
 }
@@ -41,7 +42,11 @@
 
 - (void)removeDropboxBrowser {
     [_view dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)deleteAnnotationAndRemoveBrowser {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RemoveAnnoationNotification" object:_drop];
+    [self removeDropboxBrowser];
 }
 
 - (void)refreshLibrarySection {
