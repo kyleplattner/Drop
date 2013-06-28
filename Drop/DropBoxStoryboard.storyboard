@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -36,10 +36,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Kiosk DropboxPDF Root View Controller - Root View Controller-->
+        <!--Dropbox Root View Controller - Root View Controller-->
         <scene sceneID="NkX-lE-xIk">
             <objects>
-                <tableViewController id="BqC-fJ-hQY" customClass="KioskDropboxPDFRootViewController" sceneMemberID="viewController">
+                <tableViewController id="BqC-fJ-hQY" customClass="DropboxRootViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wl5-oB-RMU">
                         <rect key="frame" x="0.0" y="64" width="540" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="1778" y="-79"/>
         </scene>
-        <!--Kiosk DropboxPDF Browser View Controller-->
+        <!--Dropbox Browser View Controller-->
         <scene sceneID="ePe-3D-GtR">
             <objects>
-                <navigationController storyboardIdentifier="KioskDropboxPDFBrowserViewControllerID" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="npb-qJ-KKk" customClass="KioskDropboxPDFBrowserViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DropboxBrowserViewControllerID" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="npb-qJ-KKk" customClass="DropboxBrowserViewController" sceneMemberID="viewController">
                     <modalFormSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Ko-Ke-qEt">
                         <autoresizingMask key="autoresizingMask"/>
@@ -93,6 +93,17 @@
             <point key="canvasLocation" x="928" y="73"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="DropboxBrowserViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DropboxBrowserViewController.h"/>
+        </class>
+        <class className="DropboxRootViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DropboxRootViewController.h"/>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>

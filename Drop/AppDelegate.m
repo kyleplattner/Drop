@@ -10,7 +10,6 @@
 #import <DropboxSDK/DropboxSDK.h>
 #import "TestFlight.h"
 #import <Parse/Parse.h>
-#import "FTASync.h"
 
 @interface AppDelegate ()
 - (void)sendLoginNotification;
@@ -20,10 +19,10 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    DBSession* dbSession = [[DBSession alloc] initWithAppKey:@"yii6grqm3mp900l" appSecret:@"pntxyr3j0ynf4j0" root:kDBRootDropbox];
+    DBSession* dbSession = [[DBSession alloc] initWithAppKey:kDropboxAppKey appSecret:kDropboxAppSecret root:kDBRootDropbox];
     [DBSession setSharedSession:dbSession];
-    [Parse setApplicationId:@"6ccB0yMKVEEo8i6kQmlKX6t3ryGX0Grma4VQDpQQ" clientKey:@"VRl41iG50ow5xDvQ2TtKr09bmA26stvoQpTVPi8m"];
-    [TestFlight takeOff:@"490688de-870a-47bd-93ae-eab1185b43fa"];
+    [Parse setApplicationId:kParseAppID clientKey:kParseClientKey];
+    [TestFlight takeOff:kTestFlightKey];
     return YES;
 }
 
@@ -57,7 +56,6 @@
     if (username && password && username.length && password.length) {
         return YES;
     }
-    
     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Error Registering User. Contact Kyle Plattner.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     return NO;
 }
@@ -71,7 +69,6 @@
             break;
         }
     }
-    
     if (!informationComplete) {
         [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Missing Information", nil) message:NSLocalizedString(@"Make sure you fill out all of the fields", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil] show];
     }

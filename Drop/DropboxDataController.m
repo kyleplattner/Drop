@@ -1,22 +1,22 @@
 //
-//  KioskDropboxPDFDataController.m
-//  epaper
+//  DropboxDataController.m
+//  Drop
 //
-//  Created by daniel bierwirth on 3/6/12.
-//  Copyright (c) 2013 iRare Media. All rights reserved.
+//  Created by Kyle Plattner on 6/28/13.
+//  Copyright (c) 2013 Precision Planting. All rights reserved.
 //
 
-#import "KioskDropboxPDFDataController.h"
+#import "DropboxDataController.h"
 
-@interface KioskDropboxPDFDataController () <DBRestClientDelegate>
+@interface DropboxDataController () <DBRestClientDelegate>
 
 @end
 
-@interface KioskDropboxPDFDataController (fileimport)
+@interface DropboxDataController (fileimport)
 - (DBRestClient *)restClient;
 @end
 
-@implementation KioskDropboxPDFDataController (fileimport)
+@implementation DropboxDataController (fileimport)
 - (DBRestClient *)restClient {
     if (!restClient) {
         restClient = 
@@ -27,7 +27,7 @@
 }
 @end
 
-@implementation KioskDropboxPDFDataController
+@implementation DropboxDataController
 
 #pragma mark - public functions
 - (BOOL)listDirectoryAtPath:(NSString*)path {

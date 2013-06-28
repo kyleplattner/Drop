@@ -1,44 +1,38 @@
 //
-//  KioskDropboxPDFRootViewController.m
-//  epaper
+//  DropboxRootViewController.m
+//  Drop
 //
-//  Created by Daniel Bierwirth on 3/5/12. Edited and Updated by iRare Media on 2/24/13
-//  Copyright (c) 2013 iRare Media. All rights reserved.
+//  Created by Kyle Plattner on 6/28/13.
+//  Copyright (c) 2013 Precision Planting. All rights reserved.
 //
 
-#import "KioskDropboxPDFRootViewController.h"
+#import "DropboxRootViewController.h"
 
-@interface KioskDropboxPDFRootViewController ()
-
-@end
-
-@interface KioskDropboxPDFRootViewController (hudhelper)
-// In case of missing response - remove busiy indicator after certain time interval
+@interface DropboxRootViewController (hudhelper)
 - (void)timeout:(id)arg;
 @end
 
-@implementation KioskDropboxPDFRootViewController (hudhelper)
+@implementation DropboxRootViewController (hudhelper)
 - (void)timeout:(id)arg {
     self.hud.labelText = @"Timeout!";
     self.hud.detailsLabelText = @"Please try again later.";
     self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
 	self.hud.mode = MBProgressHUDModeCustomView;
     [self performSelector:@selector(dismissHUD:) withObject:nil afterDelay:3.0];
-    
 }
 @end
 
 
-@interface KioskDropboxPDFRootViewController (customdetaildisclosurebuttonhandling)
+@interface DropboxRootViewController (customdetaildisclosurebuttonhandling)
 - (void) moveToParentDirectory;
 - (UIButton *) makeDetailDisclosureButton:(DisclosureType)disclosureType;
 @end
 
-@interface KioskDropboxPDFRootViewController (tabledatahandling)
+@interface DropboxRootViewController (tabledatahandling)
 - (void) refreshTableView;
 @end
 
-@implementation KioskDropboxPDFRootViewController (tabledatahandling)
+@implementation DropboxRootViewController (tabledatahandling)
 - (void) refreshTableView {
     [self.tableView reloadData];
 }
@@ -46,7 +40,7 @@
 
 #pragma mark - Main Implementation
 
-@implementation KioskDropboxPDFRootViewController
+@implementation DropboxRootViewController
 static NSString* currentFileName = nil;
 
 #pragma mark - Public Functions

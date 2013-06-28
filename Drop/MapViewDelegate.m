@@ -8,7 +8,7 @@
 
 #import "MapViewDelegate.h"
 #import "DroppedPinViewController.h"
-#import "KioskDropboxPDFBrowserViewController.h"
+#import "DropboxBrowserViewController.h"
 #import <DropboxSDK/DropboxSDK.h>
 #import "Drop.h"
 #import <Parse/Parse.h>
@@ -118,11 +118,10 @@
     DropboxDelegate* dropBoxDelegate = [[DropboxDelegate alloc] init];
     dropBoxDelegate.view = self.view;
     dropBoxDelegate.drop = drop;
-    KioskDropboxPDFBrowserViewController *browser = [[KioskDropboxPDFBrowserViewController alloc] init];
+    DropboxBrowserViewController *browser = [[DropboxBrowserViewController alloc] init];
     [browser setDelegate:dropBoxDelegate];
-    UIStoryboard *iPhoneStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:[NSBundle mainBundle]];
-    UIStoryboard *iPadStoryboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPad" bundle:[NSBundle mainBundle]];
-    [KioskDropboxPDFBrowserViewController displayDropboxBrowserInPhoneStoryboard:iPhoneStoryboard displayDropboxBrowserInPadStoryboard:iPadStoryboard onView:_view withPresentationStyle:UIModalPresentationFormSheet withTransitionStyle:UIModalTransitionStyleFlipHorizontal withDelegate:dropBoxDelegate];
+    UIStoryboard *iPadStoryboard = [UIStoryboard storyboardWithName:@"DropBoxStoryboard" bundle:[NSBundle mainBundle]];
+    [DropboxBrowserViewController displayDropboxBrowserInPadStoryboard:iPadStoryboard onView:_view withPresentationStyle:UIModalPresentationFormSheet withTransitionStyle:UIModalTransitionStyleFlipHorizontal withDelegate:dropBoxDelegate];
 }
 
 -(void)removeDrop:(NSNotification*)notification {

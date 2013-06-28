@@ -50,12 +50,12 @@
 }
 
 - (void)refreshLibrarySection {
-    NSLog(@"Final Filename: %@", [KioskDropboxPDFRootViewController fileName]);
+    NSLog(@"Final Filename: %@", [DropboxRootViewController fileName]);
     NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString* localPath = [documentsPath stringByAppendingPathComponent:[KioskDropboxPDFRootViewController fileName]];
+    NSString* localPath = [documentsPath stringByAppendingPathComponent:[DropboxRootViewController fileName]];
     if([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
         [_drop setUrl:localPath];
-        [self postFileWithName:[KioskDropboxPDFRootViewController fileName] atPath:localPath];
+        [self postFileWithName:[DropboxRootViewController fileName] atPath:localPath];
     }
     [self removeDropboxBrowser];
 }

@@ -7,16 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "LoginViewController.h"
-#import "SignUpViewController.h"
 #import <Parse/Parse.h>
 #import "Drop.h"
 #import "NPReachability.h"
 #import "GIKPopoverBackgroundView.h"
-#import "SettingsViewController.h"
 
 @interface ViewController ()
-@property (nonatomic, retain) SettingsViewController *settingsViewController;
 @property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (retain, nonatomic) UIViewController *searchView;
@@ -24,9 +20,10 @@
 @property (retain, nonatomic) UIPopoverController *searchResultsPopover;
 @property (nonatomic, retain) NSMutableArray *filteredDrops;
 @property (nonatomic, retain) NSMutableArray *allDrops;
-- (IBAction)settingsButtonPressed:(id)sender;
 - (void)logInUser;
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
+- (void)setupMap;
+- (void)setupSearchBar;
 - (void)populateArrayForSearching;
 - (void)loadSearchPopover;
 - (void)selectAnnotation:(Drop*)annotation;
@@ -36,6 +33,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupMap];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateArrayForSearching) name:@"ReloadAnnoationsNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logInUser) name:@"TryLoginNotification" object:nil];
+    [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
+    [self setupSearchBar];
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(void)setupMap {
     _mapViewDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView viewController:self];
     [_mapView setDelegate:_mapViewDelegate];
     [_mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
@@ -44,11 +53,11 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     longPress.minimumPressDuration = 2.0;
     [self.mapView addGestureRecognizer:longPress];
+}
+
+-(void)setupSearchBar {
     _filteredDrops = [[NSMutableArray alloc] initWithCapacity:100];
     _allDrops = [[NSMutableArray alloc] initWithCapacity:100];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateArrayForSearching) name:@"ReloadAnnoationsNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logInUser) name:@"TryLoginNotification" object:nil];
-    [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
     [self performSelector:@selector(populateArrayForSearching) withObject:nil afterDelay:2];
     [_searchBar setDelegate:self];
     [_tableView setDelegate:self];
@@ -57,10 +66,6 @@
     [_searchView.view addSubview:_tableView];
     [_searchView setContentSizeForViewInPopover:CGSizeMake(300, 500)];
     [_searchBar setAlpha:0];
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)populateArrayForSearching {
@@ -89,13 +94,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (IBAction)settingsButtonPressed:(id)sender {
-    _settingsViewController = [[SettingsViewController alloc] init];
-    [_settingsViewController setViewController:self];
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Would you like to Log Out?" message:nil delegate:_settingsViewController cancelButtonTitle:@"Cancel" otherButtonTitles:@"Log Out", nil];
-    [alertView show];
-}
-
 - (void)logInUser {
     if (![[DBSession sharedSession] isLinked]) {
         [[DBSession sharedSession] linkFromController:self];
@@ -122,7 +120,6 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"reusable"];
     }
-    
     Drop *drop = [_filteredDrops objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@", drop.filename];
     cell.detailTextLabel.text = drop.username;
