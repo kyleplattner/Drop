@@ -14,6 +14,8 @@
 @interface AppDelegate ()
 - (void)sendLoginNotification;
 - (void)populateTable;
+- (void)startFirstRunTutorial;
+- (BOOL)isFirstRun;
 @end
 
 @implementation AppDelegate
@@ -102,12 +104,30 @@
             [PFUser logInWithUsername:[info displayName] password:[info userId]];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"QueryForAllPosts" object:nil];
             [self performSelector:@selector(populateTable) withObject:nil afterDelay:2];
+            if([self isFirstRun]) {
+                [self performSelector:@selector(startFirstRunTutorial) withObject:nil afterDelay:2];
+            }
         }
     }
 }
 
 - (void)populateTable {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadAnnoationsNotification" object:nil];
+}
+
+- (void)startFirstRunTutorial {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FirstRunNotification" object:nil];
+}
+
+- (BOOL)isFirstRun {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"isFirstRun"]) {
+        return NO;
+    }
+    
+    [defaults setObject:[NSDate date] forKey:@"isFirstRun"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    return YES;
 }
 
 @end

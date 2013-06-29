@@ -18,8 +18,12 @@
 @property (retain, nonatomic) UIViewController *searchView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (retain, nonatomic) UIPopoverController *searchResultsPopover;
+@property (retain, nonatomic) IBOutlet UIView *firstRunView;
+@property (nonatomic, nonatomic) UITapGestureRecognizer *tapRecognizer;
 @property (nonatomic, retain) NSMutableArray *filteredDrops;
 @property (nonatomic, retain) NSMutableArray *allDrops;
+- (void)startFirstRun;
+- (void)dismissFirstRun;
 - (void)logInUser;
 - (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer;
 - (void)setupMap;
@@ -36,6 +40,7 @@
     [self setupMap];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(populateArrayForSearching) name:@"ReloadAnnoationsNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logInUser) name:@"TryLoginNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startFirstRun) name:@"FirstRunNotification" object:nil];
     [self performSelector:@selector(logInUser) withObject:nil afterDelay:1];
     [self setupSearchBar];
 }
@@ -83,6 +88,21 @@
             [_searchBar setAlpha:1];
         }];
     }
+}
+
+-(void)startFirstRun {
+    _tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissFirstRun)];
+    [_firstRunView addGestureRecognizer:_tapRecognizer];
+    [UIView animateWithDuration:1 animations:^{
+        _firstRunView.alpha = 1;
+    }];
+}
+
+-(void)dismissFirstRun {
+    [_firstRunView removeGestureRecognizer:_tapRecognizer];
+    [UIView animateWithDuration:1 animations:^{
+        _firstRunView.alpha = 0;
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
